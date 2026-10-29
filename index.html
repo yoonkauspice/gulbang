@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="글방">
+<meta name="theme-color" content="#fbf6ec">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>진윤이의 글방</title>
+<style>
+:root{--bg:#fbf6ec;--ink:#2b2b3a;--sub:#6b6b7b;--accent:#c8553d;--blue:#3d6b8c;--card:#fff;--line:#e6dcc8}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+input,textarea{font:inherit;color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:20px 18px 60px}
+h1{font-size:28px;margin:6px 0 14px}
+h2{font-size:18px;margin:0}
+.big{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0 22px}
+.big button{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:22px 10px;font-size:40px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.big button b{font-size:19px}
+.big button:active{transform:scale(.98);border-color:var(--accent)}
+.row{display:flex;justify-content:space-between;align-items:center;margin:8px 0}
+.ghost{border:1.5px solid var(--line);border-radius:12px;padding:8px 14px;background:var(--card);font-size:15px}
+.primary{background:var(--accent);color:#fff;border-radius:14px;padding:12px 20px;font-size:17px;font-weight:600}
+.list{list-style:none;padding:0;margin:10px 0}
+.list li{display:flex;gap:8px;margin-bottom:10px}
+.item{flex:1;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;gap:12px;align-items:center}
+.item .ic{font-size:28px}
+.item .t{font-weight:600}
+.item .s{font-size:13px;color:var(--sub);margin-top:2px}
+.del{width:46px;border-radius:12px;font-size:18px;opacity:.55}
+.banner{background:#fff3d6;border:1.5px solid #ecd28a;border-radius:14px;padding:12px 14px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:15px}
+header.bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+#saved{font-size:13px;color:var(--sub)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:4px 0 10px}
+.chip{flex:none;padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);font-size:15px}
+.chip.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.bubble{display:flex;gap:10px;background:#eef4f8;border-radius:16px;padding:12px 14px;margin:6px 0 12px}
+.bubble .ic{font-size:26px}
+.bubble p{margin:2px 0 0;font-size:17px}
+.bubble small{color:var(--sub)}
+.toggle{display:inline-flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:10px;background:var(--card)}
+.toggle button{padding:9px 18px;font-size:16px}
+.toggle button.on{background:var(--ink);color:#fff}
+textarea.body{width:100%;min-height:46vh;border:1.5px solid var(--line);border-radius:14px;padding:14px;font-size:20px;line-height:1.7;background:var(--card);resize:vertical}
+label.f{display:block;margin:0 0 14px;font-size:15px;color:var(--sub)}
+label.f input{display:block;width:100%;margin-top:5px;border:1.5px solid var(--line);border-radius:12px;padding:12px;font-size:18px;background:var(--card);color:var(--ink)}
+.stars button{font-size:34px;color:#d9ccb0;padding:0 3px}.stars button.on{color:#f0b429}
+.pick button{font-size:32px;padding:6px 10px;border-radius:12px;border:2px solid transparent}
+.pick button.on{border-color:var(--accent);background:#fff}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.tools button{border:1.5px solid var(--line);background:var(--card);border-radius:10px;padding:8px 12px;font-size:15px}
+.tools button.on{border-color:var(--ink);background:#f1ead8}
+.dot{width:26px;height:26px;border-radius:50%;padding:0!important;border:3px solid #fff!important;box-shadow:0 0 0 1.5px var(--line)}
+.dot.on{box-shadow:0 0 0 3px var(--ink)}
+.pg{background:#fff;border:1.5px solid var(--line);border-radius:14px;overflow:hidden;line-height:0}
+canvas{display:block;touch-action:none;-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}
+.pager{display:flex;gap:10px;align-items:center;justify-content:center;margin:10px 0;font-size:15px}
+details{margin-top:12px;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:8px 12px}
+details textarea{width:100%;min-height:90px;margin-top:8px;border:1.5px solid var(--line);border-radius:10px;padding:10px;font-size:16px}
+footer.nav{display:flex;justify-content:space-between;margin-top:18px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:16px;margin:12px 0}
+.card h2{margin-bottom:10px}
+.card .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+select{font:inherit;padding:10px;border-radius:10px;border:1.5px solid var(--line);background:#fff;width:100%;margin-top:5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:999px;font-size:16px;z-index:9}
+.designer{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:18px;align-items:start}
+@media (max-width:700px){.designer{grid-template-columns:1fr}}
+.stagebox{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:10px;text-align:center}
+.stagebox svg{width:100%;max-height:58vh;height:auto}
+.ptabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.ptab{padding:9px 15px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);font-size:16px}
+.ptab.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 12px}
+.opts button{border:1.5px solid var(--line);background:var(--card);border-radius:10px;padding:9px 13px;font-size:16px}
+.opts button.on{border-color:var(--ink);background:#f1ead8;font-weight:600}
+.opts .sw{width:40px;height:40px;border-radius:50%;padding:0;border:3px solid #fff;box-shadow:0 0 0 1.5px var(--line)}
+.opts .sw.on{box-shadow:0 0 0 3.5px var(--ink)}
+.lbl{font-size:14px;color:var(--sub);margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:12px 0}
+.oc{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:8px;text-align:center}
+.oc svg{width:100%;height:auto;max-height:190px}
+.oc .t{font-size:14px;font-weight:600;margin-top:4px}
+.oc.new{border-style:dashed;color:var(--sub);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;min-height:150px}
+.ver{margin-top:30px;text-align:center;font-size:12px;color:var(--sub)}
+#print{display:none}
+@media print{
+ #app,.toast{display:none!important}
+ #print{display:block}
+ body{background:#fff}
+ .pe{page-break-before:always;font-size:14pt;line-height:1.7}
+ .pe:first-child{page-break-before:auto}
+ .pe h1{font-size:22pt;margin:0 0 4pt}
+ .pe .meta{color:#666;font-size:11pt;margin-bottom:12pt}
+ .pe h3{font-size:14pt;margin:14pt 0 4pt;color:#3d6b8c}
+ .pe img{width:100%;border:1px solid #ccc;margin:4pt 0;page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="print"></div>
+<script>
+'use strict';
+/* ===== 상수 ===== */
+const WEATHER={'☀️':'맑음','⛅':'구름 조금','☁️':'흐림','🌧️':'비','❄️':'눈'};
+const MOOD={'😊':'기쁨','😐':'보통','😢':'슬픔','😠':'화남','😴':'피곤'};
+const STEPS={
+ report:[
+  {name:'여는 글',short:'여는 글',q:'이 책을 왜 골랐어? 읽기 전에는 어떤 이야기일 것 같았어?',hint:'2~3문장'},
+  {name:'이야기 요약',short:'요약',q:'시작, 전환점, 결말 — 세 장면만 골라서 들려줄래?',hint:'줄거리는 짧게, 3~5문장'},
+  {name:'마음에 남은 장면',short:'장면',q:'가장 마음에 남은 장면은 어디야? 왜 그랬는지도 알려 줘.',hint:'책에서 마음에 든 문장 한 줄을 옮겨 써도 좋아'},
+  {name:'내 생각 넓히기',short:'생각',q:'나라면 어떻게 했을까? 내 경험 중에 닮은 일이 있었어?',hint:'4~6문장'},
+  {name:'맺는 글',short:'맺음',q:'이 책이 알려 준 건 뭐야? 작가에게 묻고 싶은 것도 한 줄 남겨 봐.',hint:'2~3문장'}
+ ],
+ diary:[
+  {name:'오늘의 이야기',short:'글',q:'오늘 가장 기억에 남는 건 뭐야? (건너뛰고 그냥 써도 돼)',hint:''}
+ ]
+};
+const TYPE_NAME={report:'독후감',diary:'일기'};
+const TYPE_ICON={report:'📖',diary:'📔'};
+
+/* ===== 유틸 ===== */
+const $=s=>document.querySelector(s);
+const app=$('#app');
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function today(){const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10);}
+function toast(m){document.querySelectorAll('.toast').forEach(x=>x.remove());const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2200);}
+function hasInk(step){return step.pages.some(p=>p.length>0);}
+
+/* ===== IndexedDB ===== */
+let db=null,entries=[],cur=null,stepIdx=0;
+function openDB(){return new Promise((res,rej)=>{
+ const r=indexedDB.open('gulbang',1);
+ r.onupgradeneeded=()=>r.result.createObjectStore('entries',{keyPath:'id'});
+ r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
+function dbAll(){return new Promise((res,rej)=>{const q=db.transaction('entries').objectStore('entries').getAll();q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error);});}
+function dbPut(e){return new Promise((res,rej)=>{const t=db.transaction('entries','readwrite');t.objectStore('entries').put(e);t.oncomplete=res;t.onerror=()=>rej(t.error);});}
+function dbDel(id){return new Promise((res,rej)=>{const t=db.transaction('entries','readwrite');t.objectStore('entries').delete(id);t.oncomplete=res;t.onerror=()=>rej(t.error);});}
+
+/* ===== 글 객체 ===== */
+function newEntry(type){
+ return {id:'e'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),type,
+  date:today(),title:'',author:'',rating:0,weather:'',mood:'',
+  created:Date.now(),updated:Date.now(),done:false,
+  steps:STEPS[type].map(()=>({mode:'key',text:'',pages:[[]]}))};
+}
+let saveTimer=null;
+function touch(){
+ if(!cur)return;
+ cur.updated=Date.now();
+ const s=$('#saved');if(s)s.textContent='저장 중…';
+ clearTimeout(saveTimer);saveTimer=setTimeout(flush,400);
+}
+async function flush(){
+ if(!cur)return;
+ clearTimeout(saveTimer);
+ try{
+  await dbPut(cur);
+  if(!entries.includes(cur)&&!entries.some(e=>e.id===cur.id))entries.push(cur);
+  const s=$('#saved');if(s)s.textContent='저장됨 ✓';
+ }catch(err){const s=$('#saved');if(s)s.textContent='⚠️ 저장 실패';}
+}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)flush();});
+
+/* ===== 옷 ===== */
+const COLORS=[['#e8505b','빨강'],['#f29e4c','주황'],['#f4d35e','노랑'],['#8ac926','연두'],['#2a9d8f','초록'],['#4a90d9','하늘'],['#3d5a98','파랑'],['#9b5de5','보라'],['#f28fb3','분홍'],['#ffffff','하양'],['#9aa0a6','회색'],['#33333c','검정']];
+const PARTS=[
+ {k:'top',name:'상의',pat:true,styles:[['tee','반팔'],['long','긴팔'],['vest','조끼']]},
+ {k:'bottom',name:'하의',pat:true,styles:[['skirt','치마'],['long','긴 치마'],['pants','바지'],['shorts','반바지']]},
+ {k:'cape',name:'망토',pat:true,styles:[['none','없음'],['short','짧은 망토'],['long','긴 망토']]},
+ {k:'hat',name:'모자',pat:true,styles:[['none','없음'],['beret','베레모'],['cap','야구모자'],['crown','왕관'],['bow','머리 리본']]},
+ {k:'acc',name:'소품',pat:false,styles:[['none','없음'],['scarf','목도리'],['bag','가방'],['badge','별 배지'],['tie','나비넥타이']]}
+];
+const PATS=[['none','무늬 없음'],['stripe','줄무늬'],['dot','물방울'],['star','별'],['check','체크']];
+function newOutfit(){
+ return {note:'',parts:{
+  top:{style:'tee',color:'#4a90d9',pattern:'none'},
+  bottom:{style:'skirt',color:'#e8505b',pattern:'none'},
+  cape:{style:'none',color:'#9b5de5',pattern:'none'},
+  hat:{style:'none',color:'#f4d35e',pattern:'none'},
+  acc:{style:'none',color:'#f29e4c',pattern:'none'}}};
+}
+function lum(hex){const n=parseInt(hex.slice(1),16);return (0.299*(n>>16)+0.587*((n>>8)&255)+0.114*(n&255))/255;}
+function patDefs(){
+ let t='<defs>';
+ for(const [tone,col,op] of [['l','#000','.2'],['d','#fff','.6']]){
+  t+=`<pattern id="pt-stripe-${tone}" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="6" fill="${col}" fill-opacity="${op}"/></pattern>`;
+  t+=`<pattern id="pt-dot-${tone}" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="3" fill="${col}" fill-opacity="${op}"/></pattern>`;
+  t+=`<pattern id="pt-star-${tone}" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M9 3l1.8 3.8 4.2.6-3 3 .7 4.2L9 12.6 5.3 14.6l.7-4.2-3-3 4.2-.6z" fill="${col}" fill-opacity="${op}"/></pattern>`;
+  t+=`<pattern id="pt-check-${tone}" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="${col}" fill-opacity="${op}"/><rect x="8" y="8" width="8" height="8" fill="${col}" fill-opacity="${op}"/></pattern>`;
+ }
+ return t+'</defs>';
+}
+function shp(d,p,plain){
+ let t=`<path d="${d}" fill="${p.color}" stroke="#2b2b3a" stroke-width="1.6" stroke-linejoin="round"/>`;
+ if(!plain&&p.pattern&&p.pattern!=='none')t+=`<path d="${d}" fill="url(#pt-${p.pattern}-${lum(p.color)>0.72?'l':'d'})" stroke="none"/>`;
+ return t;
+}
+function outfitSVG(o){
+ const P=o.parts,sk='#f6d9bd',ink='#2b2b3a';
+ const sc=(x,y,w,h,r)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${sk}" stroke="${ink}" stroke-width="1.6"/>`;
+ let t=`<svg viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="옷 디자인">`+patDefs();
+ t+=`<ellipse cx="100" cy="306" rx="60" ry="7" fill="#000" fill-opacity=".08"/>`;
+ // 망토(뒤)
+ if(P.cape.style==='short')t+=shp('M70 86 L130 86 L148 204 L52 204 Z',P.cape);
+ else if(P.cape.style==='long')t+=shp('M70 86 L130 86 L160 294 L40 294 Z',P.cape);
+ // 몸
+ t+=sc(80,160,18,132,8)+sc(102,160,18,132,8);
+ t+=`<ellipse cx="89" cy="294" rx="14" ry="6" fill="#33333c"/><ellipse cx="111" cy="294" rx="14" ry="6" fill="#33333c"/>`;
+ t+=sc(50,92,18,72,9)+sc(132,92,18,72,9);
+ t+=sc(70,84,60,86,12)+sc(92,70,16,20,4);
+ t+=`<circle cx="100" cy="46" r="26" fill="${sk}" stroke="${ink}" stroke-width="1.6"/>`;
+ t+=`<path d="M74 44 Q74 18 100 18 Q126 18 126 44 Q116 30 100 30 Q84 30 74 44 Z" fill="#5b3a29"/>`;
+ t+=`<circle cx="91" cy="48" r="2.2" fill="${ink}"/><circle cx="109" cy="48" r="2.2" fill="${ink}"/>`;
+ t+=`<path d="M94 58 Q100 63 106 58" fill="none" stroke="${ink}" stroke-width="1.6" stroke-linecap="round"/>`;
+ t+=`<circle cx="86" cy="56" r="3.5" fill="#f2a29a" fill-opacity=".5"/><circle cx="114" cy="56" r="3.5" fill="#f2a29a" fill-opacity=".5"/>`;
+ // 하의
+ const b=P.bottom;
+ if(b.style==='skirt')t+=shp('M70 164 L130 164 L148 236 L52 236 Z',b);
+ else if(b.style==='long')t+=shp('M70 164 L130 164 L156 288 L44 288 Z',b);
+ else if(b.style==='pants')t+=shp('M72 164 L101 164 L99 290 L77 290 Z',b)+shp('M99 164 L128 164 L123 290 L101 290 Z',b);
+ else if(b.style==='shorts')t+=shp('M72 164 L101 164 L100 218 L74 218 Z',b)+shp('M99 164 L128 164 L126 218 L100 218 Z',b);
+ // 상의
+ const o1=P.top;
+ if(o1.style==='tee')t+=shp('M68 86 L50 90 L46 104 L54 128 L70 118 Z',o1)+shp('M132 86 L150 90 L154 104 L146 128 L130 118 Z',o1);
+ else if(o1.style==='long')t+=shp('M68 86 L50 90 L46 104 L48 166 L66 166 L70 120 Z',o1)+shp('M132 86 L150 90 L154 104 L152 166 L134 166 L130 120 Z',o1);
+ t+=o1.style==='vest'?shp('M72 86 Q100 98 128 86 L128 170 L72 170 Z',o1):shp('M68 86 Q100 98 132 86 L132 170 L68 170 Z',o1);
+ // 망토 여밈
+ if(P.cape.style!=='none')t+=`<circle cx="100" cy="92" r="5" fill="#f4d35e" stroke="${ink}" stroke-width="1.4"/>`;
+ // 소품
+ const a=P.acc,ap={color:a.color,pattern:'none'};
+ if(a.style==='scarf')t+=shp('M82 76 Q100 90 118 76 L120 90 Q100 104 80 90 Z',ap)+shp('M104 92 L118 92 L122 128 L106 126 Z',ap);
+ else if(a.style==='bag')t+=`<path d="M130 88 L62 164" stroke="${a.color}" stroke-width="3.5" fill="none" stroke-linecap="round"/>`+`<rect x="40" y="158" width="28" height="28" rx="4" fill="${a.color}" stroke="${ink}" stroke-width="1.6"/>`;
+ else if(a.style==='badge')t+=shp('M86 100 L90 109 L100 110 L92.5 116.5 L95 126 L86 121 L77 126 L79.5 116.5 L72 110 L82 109 Z',ap);
+ else if(a.style==='tie')t+=shp('M100 92 L84 84 L84 100 Z',ap)+shp('M100 92 L116 84 L116 100 Z',ap)+`<circle cx="100" cy="92" r="3.5" fill="${a.color}" stroke="${ink}" stroke-width="1.4"/>`;
+ // 모자
+ const h=P.hat;
+ if(h.style==='beret')t+=shp('M72 30 Q74 8 104 10 Q128 12 130 30 Q100 22 72 30 Z',h)+`<circle cx="104" cy="9" r="3.5" fill="${h.color}" stroke="${ink}" stroke-width="1.4"/>`;
+ else if(h.style==='cap')t+=shp('M74 32 Q76 8 100 8 Q124 8 126 32 Z',h)+shp('M120 30 L152 34 Q152 41 120 38 Z',h,true);
+ else if(h.style==='crown')t+=shp('M74 28 L74 8 L87 19 L100 4 L113 19 L126 8 L126 28 Z',h);
+ else if(h.style==='bow')t+=shp('M116 22 L134 12 L134 32 Z',h)+shp('M116 22 L98 12 L98 32 Z',h)+`<circle cx="116" cy="22" r="5" fill="${h.color}" stroke="${ink}" stroke-width="1.4"/>`;
+ return t+'</svg>';
+}
+function entryLabel(e){return e.title||(e.type==='diary'?e.date+' 일기':'(제목 없음)');}
+let dPart='top';
+function renderDesigner(e){
+ cur=e;onResize=null;
+ if(!e.outfit)e.outfit=newOutfit();
+ const o=e.outfit;
+ const hint=e.type==='diary'
+  ?`오늘 하루에 어울리는 옷을 만들어 줘!${e.mood||e.weather?' (오늘은 '+(e.weather||'')+' '+(e.mood||'')+')':''}`
+  :'이 책의 주인공(또는 마음에 든 인물)에게 어울리는 옷을 만들어 줘!';
+ app.innerHTML=`<div class="wrap">
+  <header class="bar"><button class="ghost" id="back">← 나중에 할게</button><span id="saved"></span></header>
+  <h1>👗 옷 만들기</h1>
+  <div class="bubble"><span class="ic">💬</span><div><b>${esc(entryLabel(e))}</b><p>${esc(hint)}</p></div></div>
+  <div class="designer"><div class="stagebox" id="pv"></div><div id="ctl"></div></div>
+  <label class="f" style="margin-top:14px">이 옷을 이렇게 만든 이유 (한 줄)<input id="o-note" maxlength="120" value="${esc(o.note)}" placeholder="예: 겁이 많지만 마지막에 용감해져서 망토를 빨갛게 했어요"></label>
+  <footer class="nav"><span></span><button class="primary" id="fin">옷 완성! 옷장에 걸기</button></footer>
+ </div>`;
+ const draw=()=>{
+  $('#pv').innerHTML=outfitSVG(o);
+  const part=PARTS.find(p=>p.k===dPart),cp=o.parts[dPart];
+  $('#ctl').innerHTML=`
+   <div class="ptabs">${PARTS.map(p=>`<button class="ptab ${p.k===dPart?'on':''}" data-part="${p.k}">${p.name}</button>`).join('')}</div>
+   <div class="lbl">모양</div>
+   <div class="opts">${part.styles.map(([v,n])=>`<button data-style="${v}" class="${cp.style===v?'on':''}">${n}</button>`).join('')}</div>
+   ${cp.style==='none'?'':`<div class="lbl">색깔</div>
+   <div class="opts">${COLORS.map(([c,n])=>`<button class="sw ${cp.color===c?'on':''}" data-color="${c}" style="background:${c}" aria-label="${n}"></button>`).join('')}</div>`}
+   ${part.pat&&cp.style!=='none'?`<div class="lbl">무늬</div>
+   <div class="opts">${PATS.map(([v,n])=>`<button data-pat="${v}" class="${cp.pattern===v?'on':''}">${n}</button>`).join('')}</div>`:''}`;
+ };
+ $('#ctl').onclick=ev=>{
+  const b=ev.target.closest('button');if(!b)return;
+  const cp=o.parts[dPart];
+  if(b.dataset.part)dPart=b.dataset.part;
+  else if(b.dataset.style!==undefined)cp.style=b.dataset.style;
+  else if(b.dataset.color)cp.color=b.dataset.color;
+  else if(b.dataset.pat)cp.pattern=b.dataset.pat;
+  else return;
+  draw();touch();
+ };
+ $('#o-note').oninput=ev=>{o.note=ev.target.value;touch();};
+ $('#back').onclick=async()=>{await flush();renderHome();};
+ $('#fin').onclick=async()=>{await flush();renderCloset();toast('옷장에 걸었어요 👗');};
+ draw();
+}
+function renderCloset(){
+ cur=null;onResize=null;
+ const withO=entries.filter(e=>e.outfit).sort((a,b)=>b.date.localeCompare(a.date)||b.updated-a.updated);
+ const need=entries.filter(e=>e.done&&!e.outfit).sort((a,b)=>b.date.localeCompare(a.date));
+ app.innerHTML=`<div class="wrap">
+  <header class="bar"><button class="ghost" id="back">← 목록</button></header>
+  <h1>👗 내 옷장 (${withO.length})</h1>
+  <div class="grid">
+   ${need.map(e=>`<button class="oc new" data-mk="${e.id}"><div style="font-size:34px">✨</div><div class="t">옷 만들기</div><div style="font-size:13px">${esc(entryLabel(e))}</div></button>`).join('')}
+   ${withO.map(e=>`<button class="oc" data-ed="${e.id}">${outfitSVG(e.outfit)}<div class="t">${esc(entryLabel(e))}</div><div style="font-size:12px;color:var(--sub)">${esc(e.date)}</div></button>`).join('')}
+  </div>
+  ${withO.length||need.length?'':'<p style="color:var(--sub)">글을 다 쓰면 옷을 만들 수 있어요.</p>'}
+ </div>`;
+ $('#back').onclick=renderHome;
+ app.querySelectorAll('[data-mk],[data-ed]').forEach(b=>b.onclick=()=>{
+  dPart='top';renderDesigner(entries.find(e=>e.id===(b.dataset.mk||b.dataset.ed)));
+ });
+}
+
+/* ===== 그리기 ===== */
+const PW=1000,PH=700;
+function segment(c,s,st,a,b){
+ c.strokeStyle=st.c;
+ c.lineWidth=st.w*(0.6+0.8*(a[2]+b[2])/2)*s;
+ c.beginPath();c.moveTo(a[0]*s,a[1]*s);c.lineTo(b[0]*s,b[1]*s);c.stroke();
+}
+function drawStrokes(c,s,strokes){
+ c.lineCap='round';c.lineJoin='round';
+ for(const st of strokes){
+  const p=st.pts;
+  if(p.length===1){c.fillStyle=st.c;c.beginPath();c.arc(p[0][0]*s,p[0][1]*s,st.w*(0.6+0.8*p[0][2])*s/2,0,Math.PI*2);c.fill();continue;}
+  for(let i=1;i<p.length;i++)segment(c,s,st,p[i-1],p[i]);
+ }
+}
+function drawRules(c,s){
+ c.strokeStyle='#dde6ee';c.lineWidth=1*s;
+ for(let y=70;y<PH;y+=70){c.beginPath();c.moveTo(30*s,y*s);c.lineTo((PW-30)*s,y*s);c.stroke();}
+}
+function pageImg(strokes){
+ if(!strokes.length)return '';
+ const c=document.createElement('canvas');c.width=PW;c.height=PH;
+ const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,PW,PH);drawRules(x,1);drawStrokes(x,1,strokes);
+ return c.toDataURL('image/png');
+}
+let onResize=null;
+window.addEventListener('resize',()=>{if(onResize)onResize();});
+
+function mountPen(box,step,onChange){
+ let pi=0,tool='pen',color='#22223a',drawing=null,penSeen=false,erased=false;
+ box.innerHTML=`
+  <div class="tools">
+   <button data-t="pen" class="on">✏️ 펜</button>
+   <button data-t="eraser">🧽 지우개</button>
+   <button class="dot on" data-c="#22223a" style="background:#22223a" aria-label="검정"></button>
+   <button class="dot" data-c="#2457c5" style="background:#2457c5" aria-label="파랑"></button>
+   <button class="dot" data-c="#c8302d" style="background:#c8302d" aria-label="빨강"></button>
+   <button id="undo">↩️ 되돌리기</button>
+   <button id="clr">🗑 이 쪽 지우기</button>
+  </div>
+  <div class="pg"><canvas></canvas></div>
+  <div class="pager"><button class="ghost" id="pp">◀</button><span id="pl"></span><button class="ghost" id="pn">▶</button><button class="ghost" id="pa">＋ 쪽 추가</button></div>`;
+ const cv=box.querySelector('canvas'),ctx=cv.getContext('2d');
+ const page=()=>step.pages[pi];
+ const scale=()=>cv.width/PW;
+ function redraw(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  drawRules(ctx,scale());drawStrokes(ctx,scale(),page());
+  box.querySelector('#pl').textContent=`${pi+1} / ${step.pages.length} 쪽`;
+ }
+ function size(){
+  const w=cv.parentElement.clientWidth,dpr=window.devicePixelRatio||1;
+  cv.style.width=w+'px';cv.style.height=(w*PH/PW)+'px';
+  cv.width=Math.round(w*dpr);cv.height=Math.round(w*PH/PW*dpr);redraw();
+ }
+ onResize=size;
+ const pt=e=>{
+  const r=cv.getBoundingClientRect();
+  const pr=(e.pointerType==='pen'&&e.pressure>0)?e.pressure:0.5;
+  return [Math.round((e.clientX-r.left)/r.width*PW*10)/10,Math.round((e.clientY-r.top)/r.height*PH*10)/10,Math.round(pr*100)/100];
+ };
+ function erase(p){
+  const R=26,before=page().length;
+  step.pages[pi]=page().filter(st=>!st.pts.some(q=>Math.hypot(q[0]-p[0],q[1]-p[1])<R));
+  if(page().length!==before){erased=true;redraw();}
+ }
+ cv.addEventListener('pointerdown',e=>{
+  if(e.pointerType==='pen')penSeen=true;
+  if(e.pointerType==='touch'&&penSeen)return; // 손바닥 무시
+  e.preventDefault();cv.setPointerCapture(e.pointerId);
+  const p=pt(e);
+  if(tool==='eraser'){drawing={erase:true};erased=false;erase(p);}
+  else{
+   const st={c:color,w:3.5,pts:[p]};page().push(st);drawing=st;
+   ctx.fillStyle=color;ctx.beginPath();ctx.arc(p[0]*scale(),p[1]*scale(),st.w*1.0*scale()/2,0,Math.PI*2);ctx.fill();
+  }
+ });
+ cv.addEventListener('pointermove',e=>{
+  if(!drawing)return;
+  e.preventDefault();
+  const evs=e.getCoalescedEvents?e.getCoalescedEvents():[e];
+  for(const ev of (evs.length?evs:[e])){
+   const p=pt(ev);
+   if(drawing.erase){erase(p);continue;}
+   const a=drawing.pts[drawing.pts.length-1];
+   drawing.pts.push(p);
+   ctx.lineCap='round';segment(ctx,scale(),drawing,a,p);
+  }
+ });
+ const end=()=>{
+  if(!drawing)return;
+  const wasErase=drawing.erase;drawing=null;
+  if(!wasErase||erased)onChange();
+ };
+ cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
+ box.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.t){tool=b.dataset.t;box.querySelectorAll('[data-t]').forEach(x=>x.classList.toggle('on',x===b));}
+  else if(b.dataset.c){color=b.dataset.c;tool='pen';box.querySelectorAll('[data-c]').forEach(x=>x.classList.toggle('on',x===b));box.querySelectorAll('[data-t]').forEach(x=>x.classList.toggle('on',x.dataset.t==='pen'));}
+  else if(b.id==='undo'){if(page().length){page().pop();redraw();onChange();}}
+  else if(b.id==='clr'){if(page().length&&confirm('이 쪽의 글씨를 모두 지울까요?')){step.pages[pi]=[];redraw();onChange();}}
+  else if(b.id==='pp'){if(pi>0){pi--;redraw();}}
+  else if(b.id==='pn'){if(pi<step.pages.length-1){pi++;redraw();}}
+  else if(b.id==='pa'){step.pages.push([]);pi=step.pages.length-1;redraw();onChange();}
+ });
+ size();
+}
+
+/* ===== 홈 ===== */
+function lastBackupDays(){
+ const t=+localStorage.getItem('gulbang_lastBackup')||0;
+ return t?Math.floor((Date.now()-t)/86400000):null;
+}
+function preview(e){
+ for(const s of e.steps){if(s.text.trim())return s.text.trim().replace(/\s+/g,' ').slice(0,46);}
+ return e.steps.some(hasInk)?'✏️ 손글씨로 쓴 글':'(아직 비어 있어요)';
+}
+function renderHome(){
+ cur=null;onResize=null;
+ const list=[...entries].sort((a,b)=>b.date.localeCompare(a.date)||b.updated-a.updated);
+ const d=lastBackupDays();
+ const banner=(entries.length&&(d===null||d>=30))
+  ?`<div class="banner"><span>💾 ${d===null?'아직 백업한 적이 없어요.':d+'일 전에 백업했어요.'} 소중한 글이라 한 달에 한 번은 백업해 두자.</span><button class="ghost" id="goBackup">백업하기</button></div>`:'';
+ app.innerHTML=`<div class="wrap">
+  <h1>✒️ 진윤이의 글방</h1>${banner}
+  <div class="big">
+   <button data-new="report">📖<b>독후감 쓰기</b></button>
+   <button data-new="diary">📔<b>일기 쓰기</b></button>
+  </div>
+  <div class="row"><h2>내 글 (${list.length})</h2><span style="display:flex;gap:8px"><button class="ghost" id="toCloset">👗 옷장 (${entries.filter(e=>e.outfit).length})</button><button class="ghost" id="toExport">내보내기 · 백업</button></span></div>
+  <ul class="list">${list.map(e=>`<li>
+   <button class="item" data-open="${e.id}"><span class="ic">${TYPE_ICON[e.type]}</span><span><div class="t">${esc(e.title||(e.type==='diary'?e.date+' 일기':'(제목 없음)'))}${e.done?' ✅':''}${e.outfit?' 👗':''}</div><div class="s">${TYPE_NAME[e.type]} · ${e.date} · ${esc(preview(e))}</div></span></button>
+   <button class="del" data-del="${e.id}" aria-label="삭제">🗑</button></li>`).join('')||'<li style="color:var(--sub)">아직 쓴 글이 없어요. 위 버튼으로 시작해 보자!</li>'}</ul>
+ <div class="ver">진윤이의 글방 v0.2</div>
+ </div>`;
+ app.querySelectorAll('[data-new]').forEach(b=>b.onclick=()=>{cur=newEntry(b.dataset.new);stepIdx=0;renderEditor();});
+ app.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{cur=entries.find(e=>e.id===b.dataset.open);stepIdx=0;renderEditor();});
+ app.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{
+  if(!confirm('이 글을 지울까요? 되돌릴 수 없어요.'))return;
+  await dbDel(b.dataset.del);entries=entries.filter(e=>e.id!==b.dataset.del);renderHome();
+ });
+ $('#toExport').onclick=renderExport;
+ $('#toCloset').onclick=renderCloset;
+ const g=$('#goBackup');if(g)g.onclick=renderExport;
+}
+
+/* ===== 편집 ===== */
+function renderEditor(){
+ const defs=STEPS[cur.type];
+ const chipLabels=[cur.type==='report'?'책 정보':'오늘',...defs.map((d,i)=>cur.type==='report'?`${i+1} ${d.short}`:d.short)];
+ app.innerHTML=`<div class="wrap">
+  <header class="bar"><button class="ghost" id="back">← 목록</button><span><span id="saved"></span> <button class="ghost" id="toOutfit">👗 옷</button></span></header>
+  <nav class="chips">${chipLabels.map((l,i)=>`<button class="chip" data-i="${i}">${esc(l)}</button>`).join('')}</nav>
+  <main id="stage"></main>
+  <footer class="nav"><button class="ghost" id="prev">← 이전</button><button class="primary" id="next"></button></footer>
+ </div>`;
+ $('#back').onclick=async()=>{await flush();renderHome();};
+ $('#toOutfit').onclick=async()=>{await flush();dPart='top';renderDesigner(cur);};
+ app.querySelectorAll('.chip').forEach(c=>c.onclick=()=>go(+c.dataset.i));
+ $('#prev').onclick=()=>go(stepIdx-1);
+ $('#next').onclick=async()=>{
+  if(stepIdx<defs.length){go(stepIdx+1);}
+  else{cur.done=true;touch();await flush();
+   if(cur.outfit){renderHome();toast('다 썼어요! 수고했어 🎉');}
+   else{dPart='top';renderDesigner(cur);toast('다 썼어요! 이제 옷을 만들어 보자 🎉');}}
+ };
+ go(stepIdx);
+}
+function go(i){
+ const defs=STEPS[cur.type];
+ stepIdx=Math.max(0,Math.min(defs.length,i));
+ app.querySelectorAll('.chip').forEach((c,k)=>c.classList.toggle('on',k===stepIdx));
+ const act=app.querySelector('.chip.on');if(act&&act.scrollIntoView)act.scrollIntoView({block:'nearest',inline:'center'});
+ $('#prev').style.visibility=stepIdx===0?'hidden':'visible';
+ $('#next').textContent=stepIdx===defs.length?'다 썼어요 🎉':'다음 →';
+ onResize=null;
+ if(stepIdx===0)renderMeta();else renderStep(stepIdx-1);
+ window.scrollTo(0,0);
+}
+function renderMeta(){
+ const st=$('#stage');
+ if(cur.type==='report'){
+  st.innerHTML=`
+   <label class="f">책 제목<input id="f-title" value="${esc(cur.title)}" placeholder="읽은 책 제목"></label>
+   <label class="f">지은이<input id="f-author" value="${esc(cur.author)}" placeholder="글쓴이"></label>
+   <label class="f">읽은 날<input type="date" id="f-date" value="${esc(cur.date)}"></label>
+   <div class="f" style="color:var(--sub);font-size:15px">별점 (다 쓴 뒤에 줘도 돼)</div>
+   <div class="stars" id="stars">${[1,2,3,4,5].map(n=>`<button data-n="${n}" class="${n<=cur.rating?'on':''}">★</button>`).join('')}</div>`;
+  $('#f-title').oninput=e=>{cur.title=e.target.value;touch();};
+  $('#f-author').oninput=e=>{cur.author=e.target.value;touch();};
+  $('#f-date').oninput=e=>{cur.date=e.target.value||today();touch();};
+  $('#stars').onclick=e=>{
+   const b=e.target.closest('button');if(!b)return;
+   const n=+b.dataset.n;cur.rating=(cur.rating===n)?0:n;touch();
+   $('#stars').querySelectorAll('button').forEach((x,k)=>x.classList.toggle('on',k<cur.rating));
+  };
+ }else{
+  const pick=(map,key)=>`<div class="pick" data-k="${key}">${Object.keys(map).map(k=>`<button data-v="${k}" class="${cur[key]===k?'on':''}" aria-label="${map[k]}">${k}</button>`).join('')}</div>`;
+  st.innerHTML=`
+   <label class="f">날짜<input type="date" id="f-date" value="${esc(cur.date)}"></label>
+   <div class="f" style="color:var(--sub);font-size:15px">오늘 날씨</div>${pick(WEATHER,'weather')}
+   <div class="f" style="color:var(--sub);font-size:15px;margin-top:14px">오늘 기분</div>${pick(MOOD,'mood')}
+   <label class="f" style="margin-top:14px">제목 (없어도 돼요)<input id="f-title" value="${esc(cur.title)}" placeholder="오늘 하루를 한마디로"></label>`;
+  $('#f-date').oninput=e=>{cur.date=e.target.value||today();touch();};
+  $('#f-title').oninput=e=>{cur.title=e.target.value;touch();};
+  st.querySelectorAll('.pick').forEach(p=>p.onclick=e=>{
+   const b=e.target.closest('button');if(!b)return;
+   const key=p.dataset.k;cur[key]=(cur[key]===b.dataset.v)?'':b.dataset.v;touch();
+   p.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.v===cur[key]));
+  });
+ }
+}
+function renderStep(k){
+ const def=STEPS[cur.type][k],step=cur.steps[k],st=$('#stage');
+ st.innerHTML=`
+  <div class="bubble"><span class="ic">💬</span><div><b>${esc(def.name)}</b><p>${esc(def.q)}</p>${def.hint?`<small>${esc(def.hint)}</small>`:''}</div></div>
+  <div class="toggle"><button data-m="pen">✏️ 펜으로 쓰기</button><button data-m="key">⌨️ 키보드로 쓰기</button></div>
+  <div id="inp"></div>`;
+ const setMode=m=>{
+  step.mode=m;
+  st.querySelectorAll('.toggle button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
+  const box=$('#inp');onResize=null;
+  if(m==='key'){
+   box.innerHTML=`<textarea class="body" id="ta" placeholder="여기에 써 봐">${esc(step.text)}</textarea><small id="cnt" style="color:var(--sub)"></small>`;
+   const ta=$('#ta'),cnt=$('#cnt');
+   const upd=()=>{cnt.textContent=ta.value.length+'자';};upd();
+   ta.oninput=()=>{step.text=ta.value;upd();touch();};
+  }else{
+   box.innerHTML=`<div id="penbox"></div>
+    <details><summary>글자로 옮기기 (책으로 엮을 때 쓰는 칸)</summary>
+     <textarea id="tv" placeholder="손글씨를 글자로 옮겨 적어 두면 책 원고로 쓸 수 있어요">${esc(step.text)}</textarea></details>`;
+   mountPen($('#penbox'),step,touch);
+   $('#tv').oninput=e=>{step.text=e.target.value;touch();};
+  }
+ };
+ st.querySelectorAll('.toggle button').forEach(b=>b.onclick=()=>{setMode(b.dataset.m);touch();});
+ setMode(step.mode||'key');
+}
+
+/* ===== 내보내기 ===== */
+function download(name,text,type){
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;
+ document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+}
+function stamp(){return today().replace(/-/g,'');}
+function toMd(list){
+ return list.map(e=>{
+  const defs=STEPS[e.type];
+  let h;
+  if(e.type==='report'){
+   h=`# ${e.title||'(제목 없음)'}${e.author?' — '+e.author:''}\n\n- 종류: 독후감\n- 날짜: ${e.date}\n`+(e.rating?`- 별점: ${'★'.repeat(e.rating)}${'☆'.repeat(5-e.rating)}\n`:'');
+  }else{
+   h=`# ${e.date} 일기${e.title?' — '+e.title:''}\n\n- 종류: 일기\n`+(e.weather?`- 날씨: ${WEATHER[e.weather]||e.weather}\n`:'')+(e.mood?`- 기분: ${MOOD[e.mood]||e.mood}\n`:'');
+  }
+  const body=e.steps.map((s,i)=>{
+   const t=s.text.trim()||(hasInk(s)?'(손글씨로 씀 — 글자로 옮겨지지 않음)':'');
+   if(!t)return '';
+   return e.type==='report'?`\n## ${i+1}. ${defs[i].name}\n\n${t}\n`:`\n${t}\n`;
+  }).join('');
+  const ot=(e.outfit&&e.outfit.note.trim())?`\n## 옷 이야기\n\n${e.outfit.note.trim()}\n`:'';
+  return h+body+ot;
+ }).join('\n\n---\n\n');
+}
+function buildPrint(list){
+ return list.map(e=>{
+  const defs=STEPS[e.type];
+  const head=e.type==='report'
+   ?`<h1>${esc(e.title||'(제목 없음)')}</h1><div class="meta">독후감${e.author?' · '+esc(e.author):''} · ${esc(e.date)}${e.rating?' · '+'★'.repeat(e.rating)+'☆'.repeat(5-e.rating):''}</div>`
+   :`<h1>${esc(e.date)} ${e.weather||''} ${e.mood||''}</h1><div class="meta">일기${e.title?' · '+esc(e.title):''}</div>`;
+  const body=e.steps.map((s,i)=>{
+   const imgs=s.pages.map(pageImg).filter(Boolean).map(u=>`<img src="${u}" alt="">`).join('');
+   const txt=s.text.trim()?`<p>${esc(s.text.trim()).replace(/\n/g,'<br>')}</p>`:'';
+   if(!imgs&&!txt)return '';
+   return (e.type==='report'?`<h3>${i+1}. ${esc(defs[i].name)}</h3>`:'')+imgs+(imgs&&txt?'':'')+txt;
+  }).join('');
+  const ob=e.outfit?`<div style="text-align:center;page-break-inside:avoid;margin-top:14pt"><div style="width:46mm;margin:0 auto">${outfitSVG(e.outfit)}</div>${e.outfit.note.trim()?`<p>${esc(e.outfit.note.trim())}</p>`:''}</div>`:'';
+  return `<section class="pe">${head}${body}${ob}</section>`;
+ }).join('');
+}
+function renderExport(){
+ cur=null;onResize=null;
+ app.innerHTML=`<div class="wrap">
+  <header class="bar"><button class="ghost" id="back">← 목록</button></header>
+  <h1>내보내기 · 백업</h1>
+  <div class="card"><h2>어떤 글을 내보낼까?</h2>
+   <label class="f">종류<select id="x-type"><option value="all">독후감 + 일기</option><option value="report">독후감만</option><option value="diary">일기만</option></select></label>
+   <div class="two"><label class="f">부터<input type="date" id="x-from"></label><label class="f">까지<input type="date" id="x-to"></label></div>
+   <div id="x-count" style="color:var(--sub)"></div>
+   <div class="btns">
+    <button class="primary" id="x-md">글만 저장 (.md)</button>
+    <button class="primary" id="x-pdf">PDF로 인쇄 (손글씨 포함)</button>
+   </div>
+   <p style="font-size:14px;color:var(--sub)">글만 저장은 키보드로 쓴 글과 &quot;글자로 옮기기&quot;에 적은 글이 들어가요. PDF는 인쇄 창에서 &quot;PDF로 저장&quot;을 고르면 돼요.</p>
+  </div>
+  <div class="card"><h2>전체 백업</h2>
+   <p style="margin:0;font-size:15px;color:var(--sub)">손글씨까지 전부 담아서 나중에 복원할 수 있어요. 모든 글이 들어가요(위 조건과 무관).</p>
+   <div class="btns"><button class="ghost" id="x-json">백업 파일 저장 (.json)</button><button class="ghost" id="x-imp">백업 불러오기</button></div>
+   <input type="file" id="x-file" accept=".json,application/json" hidden>
+  </div></div>`;
+ const filtered=()=>{
+  const t=$('#x-type').value,f=$('#x-from').value,to=$('#x-to').value;
+  return entries.filter(e=>(t==='all'||e.type===t)&&(!f||e.date>=f)&&(!to||e.date<=to)).sort((a,b)=>a.date.localeCompare(b.date)||a.created-b.created);
+ };
+ const cnt=()=>{$('#x-count').textContent=`내보낼 글: ${filtered().length}편`;};
+ ['x-type','x-from','x-to'].forEach(id=>$('#'+id).onchange=cnt);cnt();
+ $('#back').onclick=renderHome;
+ $('#x-md').onclick=()=>{const l=filtered();if(!l.length)return toast('내보낼 글이 없어요');download(`글방_${stamp()}.md`,toMd(l),'text/markdown');};
+ $('#x-pdf').onclick=()=>{
+  const l=filtered();if(!l.length)return toast('내보낼 글이 없어요');
+  $('#print').innerHTML=buildPrint(l);
+  window.onafterprint=()=>{$('#print').innerHTML='';window.onafterprint=null;};
+  setTimeout(()=>window.print(),150);
+ };
+ $('#x-json').onclick=()=>{
+  download(`글방_백업_${stamp()}.json`,JSON.stringify({app:'gulbang',version:1,exported:new Date().toISOString(),entries}),'application/json');
+  localStorage.setItem('gulbang_lastBackup',String(Date.now()));toast('백업 파일을 만들었어요 💾');
+ };
+ $('#x-imp').onclick=()=>$('#x-file').click();
+ $('#x-file').onchange=async e=>{
+  const f=e.target.files[0];if(!f)return;
+  try{
+   const j=JSON.parse(await f.text());
+   if(j.app!=='gulbang'||!Array.isArray(j.entries))throw new Error('형식');
+   let n=0;
+   for(const it of j.entries){
+    const old=entries.find(x=>x.id===it.id);
+    if(!old||(it.updated||0)>(old.updated||0)){await dbPut(it);n++;}
+   }
+   entries=await dbAll();toast(`${n}편을 불러왔어요`);renderExport();
+  }catch(err){alert('백업 파일을 읽지 못했어요. 이 앱에서 만든 .json 파일인지 확인해 줘.');}
+  e.target.value='';
+ };
+}
+
+/* ===== 시작 ===== */
+if('serviceWorker' in navigator)window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});
+(async function init(){
+ try{
+  db=await openDB();entries=await dbAll();
+  if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();
+  renderHome();
+ }catch(err){
+  app.innerHTML='<div class="wrap"><h1>✒️ 진윤이의 글방</h1><div class="banner">이 브라우저에서는 글을 저장할 수 없어요. 사파리의 비공개 모드인지 확인해 줘.</div></div>';
+ }
+})();
+</script>
+</body>
+</html>
