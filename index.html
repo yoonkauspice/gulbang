@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="글방">
-<meta name="theme-color" content="#fbf6ec">
+<meta name="theme-color" content="#f4ecd8">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>진윤이의 글방</title>
@@ -70,8 +70,9 @@ select{font:inherit;padding:10px;border-radius:10px;border:1.5px solid var(--lin
 .toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:999px;font-size:16px;z-index:9}
 .designer{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:18px;align-items:start}
 @media (max-width:700px){.designer{grid-template-columns:1fr}}
-.stagebox{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:10px;text-align:center}
-.stagebox svg{width:100%;max-height:58vh;height:auto}
+.stagebox{background:#f3ead7;border-radius:18px;padding:0;overflow:hidden;line-height:0;border:1.5px solid #cdbf9d}
+.stagebox svg{display:block;width:100%;height:auto;max-height:72vh;margin:0 auto}
+.stagebox canvas{display:block;width:100%;height:auto}
 .ptabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
 .ptab{padding:9px 15px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);font-size:16px}
 .ptab.on{background:var(--accent);color:#fff;border-color:var(--accent)}
@@ -81,11 +82,11 @@ select{font:inherit;padding:10px;border-radius:10px;border:1.5px solid var(--lin
 .opts .sw{width:40px;height:40px;border-radius:50%;padding:0;border:3px solid #fff;box-shadow:0 0 0 1.5px var(--line)}
 .opts .sw.on{box-shadow:0 0 0 3.5px var(--ink)}
 .lbl{font-size:14px;color:var(--sub);margin-top:8px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:12px 0}
-.oc{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:8px;text-align:center}
-.oc svg{width:100%;height:auto;max-height:190px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin:12px 0}
+.oc{background:#f6efdc;border:1.5px solid #cdbf9d;border-radius:16px;padding:3px 3px 8px;text-align:center;color:#3a2a22}
+.oc svg,.oc img,.oimg{display:block;width:100%;height:auto;border-radius:12px}
 .oc .t{font-size:14px;font-weight:600;margin-top:4px}
-.oc.new{border-style:dashed;color:var(--sub);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;min-height:150px}
+.oc.new{background:var(--card);border-color:var(--line);border-style:dashed;color:var(--sub);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;min-height:150px}
 .ver{margin-top:30px;text-align:center;font-size:12px;color:var(--sub)}
 #print{display:none}
 @media print{
@@ -99,6 +100,51 @@ select{font:inherit;padding:10px;border-radius:10px;border:1.5px solid var(--lin
  .pe h3{font-size:14pt;margin:14pt 0 4pt;color:#3d6b8c}
  .pe img{width:100%;border:1px solid #ccc;margin:4pt 0;page-break-inside:avoid}
 }
+
+/* ===== v0.6 디자인: 1920년대 패션 플레이트 분위기 ===== */
+:root{--bg:#f4ecd8;--ink:#3a2a22;--sub:#8a7461;--accent:#c4685c;--blue:#7a9bb5;--sage:#8fae9a;--card:#fbf6e8;--line:#d8c7a5;--serif:'AppleMyungjo','Nanum Myeongjo','Noto Serif KR','Batang',serif}
+html,body{background-color:var(--bg);background-image:linear-gradient(rgba(244,236,216,.45),rgba(244,236,216,.45)),url(bg-paper.webp);background-size:auto,cover;background-attachment:scroll,fixed;color:var(--ink)}
+h1,h2,.t,.ptab,.big button b{font-family:var(--serif)}
+h1{font-size:30px;letter-spacing:-.5px}
+.hero{display:flex;align-items:center;gap:18px;margin:4px 0 14px}
+.hero canvas{width:112px;height:auto;aspect-ratio:800/1192;border-radius:14px;border:1.5px solid var(--line);box-shadow:0 0 0 4px var(--card),0 0 0 5px var(--line);flex:none}
+.hero h1{margin:0 0 4px}.hero .tag{margin:0;color:var(--sub);font-size:16px;line-height:1.5;font-family:var(--serif)}
+.orn{color:var(--accent);font-size:22px;margin-top:6px}
+.big button,.card,.item,.banner,details,textarea.body,.pg,.bubble{box-shadow:inset 0 0 0 3px var(--card),inset 0 0 0 4px var(--line)}
+.big button{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:26px 10px}
+.big button:active{border-color:var(--accent)}
+.item,.card,.pg,details,textarea.body{background:var(--card)}
+.item{border-radius:16px;padding:14px 16px}
+.bubble{background:#ece9d9;border-radius:16px;padding:14px 16px}
+.ghost{background:var(--card);border-color:var(--line);border-radius:999px;padding:9px 16px}
+.primary{background:var(--accent);border-radius:999px;padding:13px 24px;font-family:var(--serif);box-shadow:0 2px 0 #9c4a40}
+.primary:active{transform:translateY(1px);box-shadow:none}
+.chip{background:var(--card);border-color:var(--line);font-family:var(--serif)}
+.chip.on{background:var(--sage);border-color:var(--sage);color:#fff}
+.toggle button.on{background:var(--ink)}
+.banner{background:#f6e7c1;border-color:#e4cc86}
+label.f input,select{background:var(--card);border-color:var(--line)}
+.stars button.on{color:#d7a84a}
+/* 옷 만들기 */
+.designer{grid-template-columns:minmax(280px,380px) 1fr;gap:22px}
+.designer .stagebox{position:sticky;top:12px;border-radius:20px;border:1.5px solid var(--line);box-shadow:0 0 0 5px var(--card),0 0 0 6.5px var(--line);background:var(--card)}
+@media (max-width:700px){.designer{grid-template-columns:1fr}.designer .stagebox{position:static;max-width:300px;margin:0 auto}}
+.ptabs{gap:8px;margin-bottom:12px}
+.ptab{padding:10px 16px;font-size:17px;background:var(--card);border-color:var(--line);display:flex;align-items:center;gap:6px}
+.ptab span{font-size:18px}
+.ptab.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.lbl{font-family:var(--serif);font-size:16px;color:var(--ink);margin:14px 0 6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
+.ic2{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:5px 5px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:14px;font-weight:600}
+.ic2 canvas{width:100%;height:auto;aspect-ratio:4/5;border-radius:10px;touch-action:auto}
+.ic2.on{border-color:var(--accent);box-shadow:0 0 0 2.5px var(--accent)}
+.opts .sw{width:46px;height:46px}
+.opts.pats{gap:10px}
+.opts button.pt{width:76px;padding:4px 4px 6px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:13px;border-radius:12px}
+.pt canvas{width:56px;height:56px;border-radius:8px;touch-action:auto;border:1px solid var(--line)}
+.opts button.pt.on{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent);background:var(--card)}
+.oc{background:var(--card);border-radius:18px;box-shadow:0 0 0 3px var(--bg),0 0 0 4.5px var(--line)}
+.oc .t{font-family:var(--serif)}
 </style>
 </head>
 <body>
@@ -167,90 +213,401 @@ async function flush(){
 }
 document.addEventListener('visibilitychange',()=>{if(document.hidden)flush();});
 
-/* ===== 옷 ===== */
-const COLORS=[['#e8505b','빨강'],['#f29e4c','주황'],['#f4d35e','노랑'],['#8ac926','연두'],['#2a9d8f','초록'],['#4a90d9','하늘'],['#3d5a98','파랑'],['#9b5de5','보라'],['#f28fb3','분홍'],['#ffffff','하양'],['#9aa0a6','회색'],['#33333c','검정']];
+/* ===== 옷 (1920년대 패션 플레이트 스타일) ===== */
+const COLORS=[['#b23a48','딸기'],['#d1604a','산호'],['#e9aaa3','연분홍'],['#d7a84a','겨자'],['#f3ead2','크림'],['#8fbfae','민트'],['#2f8d82','청록'],['#4272b3','파랑'],['#27426e','남색'],['#7d5a9b','보라'],['#52392f','갈색'],['#2b2a33','검정']];
+const HAIRS=[['#2a2220','검정'],['#4a3126','짙은 갈색'],['#7a4b2e','밤색'],['#b9783c','구릿빛'],['#dcb96e','금발'],['#9a3b2c','적갈색']];
+const SKINS=[['#f4d9c3','밝은 살구'],['#ecc4a2','살구'],['#d4a07a','황갈'],['#a97650','구리'],['#7b4f36','진한 갈색']];
 const PARTS=[
- {k:'top',name:'상의',pat:true,styles:[['tee','반팔'],['long','긴팔'],['vest','조끼']]},
- {k:'bottom',name:'하의',pat:true,styles:[['skirt','치마'],['long','긴 치마'],['pants','바지'],['shorts','반바지']]},
- {k:'cape',name:'망토',pat:true,styles:[['none','없음'],['short','짧은 망토'],['long','긴 망토']]},
- {k:'hat',name:'모자',pat:true,styles:[['none','없음'],['beret','베레모'],['cap','야구모자'],['crown','왕관'],['bow','머리 리본']]},
- {k:'acc',name:'소품',pat:false,styles:[['none','없음'],['scarf','목도리'],['bag','가방'],['badge','별 배지'],['tie','나비넥타이']]}
+ {k:'me',name:'모델',pat:false,palette:HAIRS,colorLabel:'머리 색',skins:true,styles:[['bob','단발'],['bun','올림머리'],['long','긴 머리']]},
+ {k:'top',name:'상의',pat:true,styles:[['tee','반팔 블라우스'],['long','긴팔 블라우스'],['vest','민소매']]},
+ {k:'bottom',name:'하의',pat:true,styles:[['skirt','플레어 치마'],['long','롱 드레스'],['pants','와이드 팬츠'],['shorts','반바지']]},
+ {k:'cape',name:'망토',pat:true,styles:[['none','없음'],['short','어깨 망토'],['long','긴 코트 망토']]},
+ {k:'hat',name:'모자',pat:false,styles:[['none','없음'],['beret','클로슈 모자'],['cap','챙 넓은 모자'],['crown','머리띠'],['bow','머리 리본']]},
+ {k:'acc',name:'소품',pat:false,styles:[['none','없음'],['scarf','진주 목걸이'],['bag','손가방'],['badge','장미 코르사주'],['tie','리본 칼라'],['gloves','긴 장갑'],['umbrella','양산']]},
+ {k:'scene',name:'배경',pat:false,nocolor:true,styles:[['cloud','구름 하늘'],['pink','분홍 노을'],['garden','나무와 들판'],['paper','종이 배경']]}
 ];
-const PATS=[['none','무늬 없음'],['stripe','줄무늬'],['dot','물방울'],['star','별'],['check','체크']];
+const PATS=[['none','무늬 없음'],['lines','굵은 줄무늬'],['dot','물방울'],['floral','꽃무늬'],['paisley','페이즐리'],['check','체크'],['zig','지그재그']];
+const PAT_IDS=['lines','dot','floral','paisley','check','zig'];
+const LN='#3a2a22',INK='#241c1a';
 function newOutfit(){
- return {note:'',parts:{
-  top:{style:'tee',color:'#4a90d9',pattern:'none'},
-  bottom:{style:'skirt',color:'#e8505b',pattern:'none'},
-  cape:{style:'none',color:'#9b5de5',pattern:'none'},
-  hat:{style:'none',color:'#f4d35e',pattern:'none'},
-  acc:{style:'none',color:'#f29e4c',pattern:'none'}}};
+ return {note:'',skin:SKINS[0][0],parts:{
+  me:{style:'bob',color:HAIRS[0][0],pattern:'none'},
+  top:{style:'long',color:'#f3ead2',pattern:'none'},
+  bottom:{style:'long',color:'#2f8d82',pattern:'none'},
+  cape:{style:'none',color:'#b23a48',pattern:'none'},
+  hat:{style:'none',color:'#8fbfae',pattern:'none'},
+  acc:{style:'none',color:'#f3ead2',pattern:'none'},
+  scene:{style:'cloud',color:'#ffffff',pattern:'none'}}};
 }
-function lum(hex){const n=parseInt(hex.slice(1),16);return (0.299*(n>>16)+0.587*((n>>8)&255)+0.114*(n&255))/255;}
-function patDefs(){
- let t='<defs>';
- for(const [tone,col,op] of [['l','#000','.2'],['d','#fff','.6']]){
-  t+=`<pattern id="pt-stripe-${tone}" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="6" fill="${col}" fill-opacity="${op}"/></pattern>`;
-  t+=`<pattern id="pt-dot-${tone}" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="3" fill="${col}" fill-opacity="${op}"/></pattern>`;
-  t+=`<pattern id="pt-star-${tone}" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M9 3l1.8 3.8 4.2.6-3 3 .7 4.2L9 12.6 5.3 14.6l.7-4.2-3-3 4.2-.6z" fill="${col}" fill-opacity="${op}"/></pattern>`;
-  t+=`<pattern id="pt-check-${tone}" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="${col}" fill-opacity="${op}"/><rect x="8" y="8" width="8" height="8" fill="${col}" fill-opacity="${op}"/></pattern>`;
+function rgb(h){const n=parseInt(h.slice(1),16);return [n>>16,(n>>8)&255,n&255];}
+function mix(h,t,a){const A=rgb(h),B=rgb(t);return '#'+A.map((v,i)=>Math.round(v+(B[i]-v)*a).toString(16).padStart(2,'0')).join('');}
+const lighten=(h,a)=>mix(h,'#ffffff',a),darken=(h,a)=>mix(h,'#000000',a);
+function lum(hex){const c=rgb(hex);return (0.299*c[0]+0.587*c[1]+0.114*c[2])/255;}
+const n1=v=>(Math.round(v*10)/10);
+
+/* 종이 질감: 한 번만 만들어 모든 그림이 함께 씀 */
+function ensureGrain(){
+ if(typeof document==='undefined'||document.getElementById('gb-grain-svg'))return;
+ try{
+  const c=document.createElement('canvas');c.width=c.height=160;
+  const x=c.getContext('2d'),im=x.createImageData(160,160);
+  for(let i=0;i<im.data.length;i+=4){im.data[i]=96;im.data[i+1]=76;im.data[i+2]=58;im.data[i+3]=Math.random()*Math.random()*34;}
+  x.putImageData(im,0,0);
+  const d=document.createElement('div');
+  d.innerHTML='<svg id="gb-grain-svg" width="0" height="0" style="position:absolute;left:-9999px"><defs><pattern id="gb-grain" width="160" height="160" patternUnits="userSpaceOnUse"><image href="'+c.toDataURL('image/png')+'" width="160" height="160"/></pattern></defs></svg>';
+  document.body.appendChild(d.firstChild);
+ }catch(e){}
+}
+
+/* 부드러운 곡선 팔다리 */
+function catmull(pts,n){
+ const out=[],P=[pts[0]].concat(pts,[pts[pts.length-1]]);
+ for(let i=1;i<P.length-2;i++){
+  const a=P[i-1],b=P[i],c=P[i+1],d=P[i+2];
+  for(let j=0;j<n;j++){
+   const t=j/n,t2=t*t,t3=t2*t;
+   out.push([0.5*(2*b[0]+(-a[0]+c[0])*t+(2*a[0]-5*b[0]+4*c[0]-d[0])*t2+(-a[0]+3*b[0]-3*c[0]+d[0])*t3),
+             0.5*(2*b[1]+(-a[1]+c[1])*t+(2*a[1]-5*b[1]+4*c[1]-d[1])*t2+(-a[1]+3*b[1]-3*c[1]+d[1])*t3)]);
+  }
  }
- return t+'</defs>';
+ out.push(pts[pts.length-1]);
+ return out;
 }
-function shp(d,p,plain){
- let t=`<path d="${d}" fill="${p.color}" stroke="#2b2b3a" stroke-width="1.6" stroke-linejoin="round"/>`;
- if(!plain&&p.pattern&&p.pattern!=='none')t+=`<path d="${d}" fill="url(#pt-${p.pattern}-${lum(p.color)>0.72?'l':'d'})" stroke="none"/>`;
+function limb(ctrl,widths,t0,t1,grow){
+ const S=catmull(ctrl,8),n=S.length;
+ const wAt=i=>{const f=i/(n-1)*(widths.length-1),k=Math.min(Math.floor(f),widths.length-2),r=f-k;return widths[k]*(1-r)+widths[k+1]*r+(grow||0);};
+ const i0=Math.round(t0*(n-1)),i1=Math.round(t1*(n-1)),L=[],R=[];
+ for(let i=i0;i<=i1;i++){
+  const a=S[Math.max(i-1,0)],b=S[Math.min(i+1,n-1)];
+  let dx=b[0]-a[0],dy=b[1]-a[1];const m=Math.hypot(dx,dy)||1;dx/=m;dy/=m;
+  const w=wAt(i);
+  L.push([S[i][0]-dy*w,S[i][1]+dx*w]);R.push([S[i][0]+dy*w,S[i][1]-dx*w]);
+ }
+ const f=p=>n1(p[0])+' '+n1(p[1]);
+ return 'M'+L.map(f).join('L')+'L'+R.reverse().map(f).join('L')+'Z';
+}
+
+/* 무늬 */
+function patDef(id,pat,base){
+ const m=lum(base)>0.55?darken(base,.5):lighten(base,.72);
+ const st=`fill="none" stroke="${m}" stroke-width="1" stroke-opacity=".8"`;
+ const wrap=(w,h,body)=>`<pattern id="${id}" width="${w}" height="${h}" patternUnits="userSpaceOnUse">${body}</pattern>`;
+ if(pat==='lines')return wrap(8,8,`<rect width="3.6" height="8" fill="${m}" fill-opacity=".5"/>`);
+ if(pat==='dot')return wrap(10,10,`<circle cx="5" cy="5" r="2" fill="${m}" fill-opacity=".9"/>`);
+ if(pat==='check')return wrap(12,12,`<path d="M0 0H12M0 0V12" ${st}/><path d="M6 0V12M0 6H12" fill="none" stroke="${m}" stroke-width=".5" stroke-opacity=".55"/>`);
+ if(pat==='zig')return wrap(14,9,`<path d="M0 7L3.5 2L7 7L10.5 2L14 7" ${st}/>`);
+ if(pat==='paisley'){
+  const p=`<path d="M0 -6C4.5 -6 6 -1 3.5 2.5C1.8 4.8 -2 4.2 -2.6 1.2C-3.2 -1.8 -2.4 -6 0 -6Z" fill="${m}" fill-opacity=".8"/><circle cx="-.2" cy="-.6" r="1" fill="${base}" fill-opacity=".8"/>`;
+  return wrap(18,18,`<g transform="translate(5 7)">${p}</g><g transform="translate(14 15) rotate(150)">${p}</g>`);
+ }
+ if(pat==='floral'){
+  const fl=(x,y,r)=>{let s='';for(let i=0;i<5;i++){const a=i*Math.PI*2/5;s+=`<circle cx="${n1(x+Math.cos(a)*r*1.05)}" cy="${n1(y+Math.sin(a)*r*1.05)}" r="${r}" fill="#e2687a"/>`;}return s+`<circle cx="${x}" cy="${y}" r="${r*.6}" fill="#f4d27a"/>`;};
+  return wrap(20,20,`<path d="M5 12C8 10 10 12 11 15C8 15 6 14 5 12Z" fill="#3f9a62"/><path d="M15 3C18 5 17 8 15 9C13 7 13 5 15 3Z" fill="#3f9a62"/>${fl(5,6,1.7)}${fl(15,15,1.7)}`);
+ }
+ return '';
+}
+
+let SVG_N=0;
+function outfitSVG(o){
+ ensureGrain();
+ const u='o'+(++SVG_N)+'-';
+ const P=(o&&o.parts)||{};
+ const get=(k,d)=>Object.assign({style:'none',color:'#cccccc',pattern:'none'},d||{},P[k]||{});
+ const ME=get('me',{style:'bob',color:HAIRS[0][0]}),T=get('top'),B=get('bottom'),C=get('cape'),H=get('hat'),A=get('acc'),SC=get('scene',{style:'cloud'});
+ const SK=(o&&o.skin)||SKINS[0][0],SK2=darken(SK,.13),HC=ME.color;
+ const SKL='stroke="#5d3f31" stroke-opacity=".7" stroke-width=".7" stroke-linejoin="round"';
+
+ const gd=(k,c)=>`<linearGradient id="${u}g-${k}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${lighten(c,.14)}"/><stop offset=".55" stop-color="${c}"/><stop offset="1" stop-color="${darken(c,.12)}"/></linearGradient>`;
+ const gfill=k=>`url(#${u}g-${k})`;
+ const G=(k,p,d,pat)=>{
+  let s=`<path d="${d}" fill="${gfill(k)}" stroke="${LN}" stroke-opacity=".85" stroke-width=".9" stroke-linejoin="round"/>`;
+  if(pat&&PAT_IDS.includes(p.pattern))s+=`<path d="${d}" fill="url(#${u}p-${k})"/>`;
+  return s;
+ };
+ const fl=(d,w)=>`<path d="${d}" fill="none" stroke="${LN}" stroke-opacity=".5" stroke-width="${w||.7}" stroke-linecap="round" stroke-linejoin="round"/>`;
+ const M=s=>`<g transform="translate(240 0) scale(-1 1)">${s}</g>`;
+ const fur=(d,c)=>`<path d="${d}" fill="none" stroke="${darken(c,.5)}" stroke-width="5" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${lighten(darken(c,.45),.18)}" stroke-width="7" stroke-linecap="round" stroke-dasharray="0.1 3"/>`;
+
+ /* ---------- 장면 ---------- */
+ const S=SC.style;
+ const skyC={cloud:['#a8bcc4','#d9e0dc','#f1e9d2'],pink:['#bdb8e0','#e2d0dc','#f4e6d0'],garden:['#f2eebb','#ecebb0','#e4e7a4'],paper:['#f8f1df','#f3ead4','#ebe0c6']}[S]||['#a8bcc4','#d9e0dc','#f1e9d2'];
+ const grC={cloud:'#4f9744',pink:'#6ba24f',garden:'#3f9c7d',paper:'#93b585'}[S]||'#4f9744';
+ let defs=`<linearGradient id="${u}sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${skyC[0]}"/><stop offset=".6" stop-color="${skyC[1]}"/><stop offset="1" stop-color="${skyC[2]}"/></linearGradient>`
+  +gd('top',T.color)+gd('bottom',B.color)+gd('cape',C.color)+gd('hat',H.color)+gd('acc',A.color)+gd('hair',HC)
+  +`<radialGradient id="${u}shade"><stop offset="0" stop-color="#000" stop-opacity=".16"/><stop offset=".6" stop-color="#000" stop-opacity=".07"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>`
+  +`<clipPath id="${u}clip"><rect width="240" height="360" rx="12"/></clipPath>`;
+ [['top',T],['bottom',B],['cape',C]].forEach(([k,p])=>{if(PAT_IDS.includes(p.pattern))defs+=patDef(`${u}p-${k}`,p.pattern,p.color);});
+
+ const cloud=(cx,cy,sc,fill,edge,sh)=>{
+  const Cs=[[0,0,34],[-34,10,26],[34,12,28],[-12,-26,26],[18,-30,24],[52,-6,20],[-56,18,20],[2,22,34]];
+  let a='',b='',c='';
+  for(const [x,y,r] of Cs){a+=`<circle cx="${n1(cx+x*sc)}" cy="${n1(cy+y*sc-2.4*sc)}" r="${n1(r*sc)}" fill="${edge}"/>`;}
+  for(const [x,y,r] of Cs){b+=`<circle cx="${n1(cx+x*sc)}" cy="${n1(cy+y*sc)}" r="${n1(r*sc)}" fill="${fill}"/>`;}
+  for(const [x,y,r] of Cs){c+=`<circle cx="${n1(cx+(x+r*.28)*sc)}" cy="${n1(cy+(y+r*.34)*sc)}" r="${n1(r*.95*sc)}" fill="url(#${u}shade)"/>`;}
+  return a+b+c;
+ };
+ let sc=`<rect width="240" height="360" fill="url(#${u}sky)"/>`;
+ if(S==='cloud'||S==='pink'){
+  const pk=S==='pink',f=pk?'#dda3b8':'#97aeb8',e=pk?'#f4e8c6':'#ece6b0',sh=pk?'#b7849f':'#5f7f8e';
+  sc+=cloud(166,172,1.6,f,e,sh)+cloud(38,246,.95,f,e,sh)+cloud(204,66,.62,f,e,sh);
+ }else if(S==='garden'){
+  sc+=`<path d="M0 214L240 196V232L0 262Z" fill="#e9cf88"/><path d="M0 238L240 224V252L0 288Z" fill="#b8d38c"/><path d="M0 188L240 178V198L0 214Z" fill="#cfe0a0"/><path d="M0 164L110 160V184L0 190Z" fill="#9ec9d6" fill-opacity=".8"/>`;
+  const br=(d)=>`<path d="${d}" fill="none" stroke="#8b8a3c" stroke-width="4" stroke-linecap="round"/>`;
+  sc+=br('M-4 18C40 34 72 62 92 118')+br('M244 6C206 30 188 54 176 96')+br('M30 28C50 30 66 24 84 12');
+  const cols=['#4fa27c','#8cc5a2','#3b8e6b','#6db98f'];
+  for(let i=0;i<34;i++){
+   const t=i/34,side=i%2?1:0;
+   const x=side?244-(t*70+Math.sin(i*7.3)*16+10):(t*84+Math.sin(i*5.1)*14+6),y=side?(10+t*90+Math.cos(i*3.7)*12):(20+t*98+Math.cos(i*4.3)*12);
+   sc+=`<ellipse cx="${n1(x)}" cy="${n1(y)}" rx="9" ry="4.6" transform="rotate(${n1(Math.sin(i*2.1)*70)} ${n1(x)} ${n1(y)})" fill="${cols[i%4]}" stroke="#2f6e54" stroke-opacity=".5" stroke-width=".6"/>`;
+  }
+ }else{
+  sc+=`<ellipse cx="120" cy="330" rx="104" ry="9" fill="#000" fill-opacity=".07"/>`;
+ }
+ const gr=grC;
+ sc+=`<path d="M0 322C50 308 92 318 130 322C170 326 210 310 240 304V360H0Z" fill="${gr}"/><path d="M0 336C60 326 120 338 240 324V360H0Z" fill="${darken(gr,.2)}" fill-opacity=".55"/>`;
+ for(let i=0;i<30;i++){
+  const x=i*8.2+2,y=328+((i*7)%14),h=6+(i%4)*2;
+  sc+=`<path d="M${n1(x)} ${y}q${(i%2?2:-2)} -${h*0.6} ${(i%3-1)*3} -${h}" fill="none" stroke="${lighten(gr,.28)}" stroke-width="1.1" stroke-linecap="round"/>`;
+ }
+ sc+=`<ellipse cx="121" cy="331.5" rx="34" ry="4" fill="#1d3a1a" fill-opacity=".28"/>`;
+
+ let t=`<svg viewBox="0 0 240 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="옷 디자인"><defs>${defs}</defs><g clip-path="url(#${u}clip)">${sc}`;
+
+ /* ---------- 자세 ---------- */
+ const AL=[[100,101],[85,119],[77,141],[85,160],[100,174]],AR=[[140,100],[149,120],[153,146],[151,172],[148,198]];
+ const WL=[5.4,4.8,4.0,3.3,2.9],WR=[5.2,4.6,3.8,3.1,2.6];
+ const LL=[[112,180],[111,232],[108,278],[105,320]],LR=[[129,180],[131,232],[132,278],[134,320]],LW=[6.6,5.2,3.8,2.3];
+
+ // 긴 망토(뒤)
+ if(C.style==='long'){
+  t+=G('cape',C,'M101 96C108 90 134 90 141 96L172 318Q120 334 68 318Z',true);
+  t+=fl('M118 100L112 320M126 100L134 322')+fur('M70 318Q120 333 170 318',C.color);
+ }
+ // 긴 머리(뒤)
+ if(ME.style==='long'){
+  t+=`<path d="M124 34C140 36 150 50 150 70C151 96 155 124 151 146C145 152 132 150 126 142C128 120 126 96 124 80Z" fill="${gfill('hair')}" stroke="${LN}" stroke-opacity=".8" stroke-width=".8"/>`;
+ }
+
+ // 다리·신발
+ const shoeL='M101.5 316L109 316C109.5 321 109 325 107.5 328.5C103 329.5 97 331 92.5 331.5C91.5 329 95.5 326.5 98.5 324C100.5 322.2 101.2 319.5 101.5 316Z M106.5 326L108.5 326L108 333L106 333Z';
+ t+=`<path d="${limb(LL,LW,0,1,0)}" fill="${SK}" ${SKL}/><path d="${limb(LR,LW,0,1,0)}" fill="${SK}" ${SKL}/>`;
+ t+=`<path d="${shoeL}" fill="${INK}"/>`+M(`<path d="${shoeL}" fill="${INK}"/>`);
+ // 팔
+ t+=`<path d="${limb(AL,WL,0,1,0)}" fill="${SK}" ${SKL}/><path d="${limb(AR,WR,0,1,0)}" fill="${SK}" ${SKL}/>`;
+ // 목·몸통
+ t+=`<path d="M112.5 74C113.5 82 113 88 111 95L128 95C126 88 125.5 82 125 75Z" fill="${SK}" ${SKL}/><path d="M113 80C116 86 121 88 125 86L125 76Z" fill="${SK2}" fill-opacity=".55"/>`;
+ t+=`<path d="M100 97C104 92 112 91 121 92C130 91 138 92 142 96C142 114 136 134 133.5 150C133 162 137 172 139 182L101 182C103 172 107 162 106.5 150C105 134 99 114 100 97Z" fill="${SK}" ${SKL}/>`;
+
+ // 하의
+ const hemL='M101 181C99 204 92 232 82 260';
+ if(B.style==='skirt'){
+  t+=G('bottom',B,'M101 181C99 204 92 232 82 260Q92 269 101.5 261Q111 269 120 261Q129 269 138.5 261Q148 269 158 260C148 232 141 204 139 181Z',true);
+  t+=fl('M108 184L100 262M120 184V264M132 184L140 262M114 184L110 264M126 184L130 264',.6);
+ }else if(B.style==='long'){
+  t+=G('bottom',B,'M101 181C100 215 98 262 95 300C94 307 91 314 88 319Q104 325 120 322Q136 325 152 319C149 314 146 307 145 300C142 262 140 215 139 181Z',true);
+  t+=fl('M120 186V322M110 190C108 240 104 280 100 318M130 190C132 240 136 280 140 318',.6);
+ }else if(B.style==='pants'){
+  const leg='M101 181L121 181L122 318Q108 323 92 319C95 270 99 225 101 181Z';
+  t+=G('bottom',B,leg,true)+M(G('bottom',B,leg,true));
+  t+=fl('M111 186V320',.6)+fl('M129 186V320',.6);
+ }else if(B.style==='shorts'){
+  const leg='M101 181L121 181L120.5 232Q110 235 99 231Z';
+  t+=G('bottom',B,leg,true)+M(G('bottom',B,leg,true));
+ }
+
+ // 상의
+ const bodice='M99 98C103 93 108 92 110 92L121 116L132 91C137 91 141 93 143 97C142 115 136 134 134 150C133.5 162 137.5 172 139.5 182L100.5 182C102.5 172 106.5 162 106 150C104 134 98 115 99 98Z';
+ const vest='M104 99C105 95 108 93 112 93C113 102 117 110 121 110C125 110 129 102 130 93C134 93 137 95 139 98C138 116 135 134 134 150C133.5 162 137.5 172 139.5 182L100.5 182C102.5 172 106.5 162 106 150C105 134 102 116 104 99Z';
+ if(T.style==='tee'){
+  t+=G('top',T,limb(AL,WL,0,.34,1.5),true)+G('top',T,limb(AR,WR,0,.3,1.5),true);
+ }else if(T.style==='long'){
+  t+=G('top',T,limb(AL,WL,0,.94,1.3),true)+G('top',T,limb(AR,WR,0,.94,1.3),true);
+  t+=fl(limb(AL,WL,.92,.94,1.6),.9)+fl(limb(AR,WR,.92,.94,1.6),.9);
+ }
+ if(T.style==='tee'||T.style==='long')t+=`<circle cx="99.5" cy="102" r="5.4" fill="${gfill('top')}"/><circle cx="140.5" cy="101" r="5.2" fill="${gfill('top')}"/>`;
+ else t+=`<circle cx="99.5" cy="102" r="5.2" fill="${SK}"/><circle cx="140.5" cy="101" r="5" fill="${SK}"/>`;
+ if(T.style==='vest'){
+  t+=G('top',T,vest,true);
+ }else{
+  t+=G('top',T,bodice,true);
+  t+=`<path d="M108.5 91L121.5 117L112 109L105.5 96Z" fill="${lighten(T.color,.4)}" stroke="${LN}" stroke-opacity=".7" stroke-width=".7"/><path d="M133.5 90L121.5 117L131 108L137 94Z" fill="${lighten(T.color,.4)}" stroke="${LN}" stroke-opacity=".7" stroke-width=".7"/>`;
+ }
+ t+=fl('M121 118L121 172',.5);
+ t+=`<path d="M100.5 174L139.5 174L139.8 181L100.2 181Z" fill="${gfill('bottom')}" stroke="${LN}" stroke-opacity=".8" stroke-width=".8"/>`;
+
+ // 어깨 망토
+ if(C.style==='short'){
+  t+=G('cape',C,'M93 98C105 88 137 88 149 98C156 114 160 132 160 146C152 154 144 148 138 154C130 160 124 152 120 158C116 152 110 160 102 154C96 148 88 154 80 146C80 132 86 114 93 98Z',true);
+  t+=fl('M104 100C100 120 96 138 94 150M138 100C142 120 146 138 148 150',.6)+fur('M95 99C106 90 136 90 147 99',C.color);
+ }
+
+ // 손
+ t+=`<ellipse cx="101.5" cy="176" rx="4.6" ry="3.2" transform="rotate(28 101.5 176)" fill="${SK}" ${SKL}/><path d="M97.5 177.5L100.5 180M99.5 175.5L103 179" stroke="#5d3f31" stroke-opacity=".55" stroke-width=".5"/>`;
+ t+=`<path d="M144.2 197C143.2 204 144.6 210 147.8 212.5C151 210 152.4 204 151.4 197Z" fill="${SK}" ${SKL}/>`;
+ // 장갑
+ if(A.style==='gloves'){
+  t+=G('acc',A,limb(AL,WL,.46,1,.9),false)+G('acc',A,limb(AR,WR,.46,1,.9),false);
+  t+=`<ellipse cx="101.5" cy="176" rx="4.8" ry="3.4" transform="rotate(28 101.5 176)" fill="${gfill('acc')}" stroke="${LN}" stroke-opacity=".8" stroke-width=".8"/><path d="M144 197C143 204.5 144.6 211 147.8 213.5C151 211 152.6 204.5 151.6 197Z" fill="${gfill('acc')}" stroke="${LN}" stroke-opacity=".8" stroke-width=".8"/>`;
+ }
+
+ /* ---------- 머리 ---------- */
+ const face='M110 44C106 46 105 51 105.5 55C104 58 102 61 101.8 63.5C102.6 65 104.6 65.4 105.4 66C105 67.5 105.2 69 105.6 70C105 71.2 105.5 72.8 106.8 74.2C107.8 76.5 111 78 114.5 77.5C118.5 77 121.5 73.5 122.5 67L123.5 48C121.5 43 115 41.5 110 44Z';
+ t+=`<path d="${face}" fill="${SK}" ${SKL}/>`;
+ t+=`<circle cx="113" cy="66.5" r="4.4" fill="#e08c86" fill-opacity=".4"/>`
+  +`<path d="M108.5 58Q111.5 60.2 114.8 58" fill="none" stroke="${INK}" stroke-width="1.1" stroke-linecap="round"/><path d="M114.3 58L116 57" stroke="${INK}" stroke-width=".9" stroke-linecap="round"/>`
+  +`<path d="M107 54.6Q111 53 115.6 54.2" fill="none" stroke="${INK}" stroke-width=".9" stroke-linecap="round"/>`
+  +`<path d="M105.4 68.1C106.8 67.5 108 67.9 108.6 68.8C107.8 70.4 106.4 70.8 105.4 70.1Z" fill="#b3303a"/>`;
+ // 머리카락(앞)
+ const cap='M105 50C102 36 112 30 124 31C136 33 142 46 141 62C140 72 137 80 132 84C128 84 125 82 123 79C125 73 125 66 124.5 60C124 53 121 47 115 44C111 43 107 45 105 50Z';
+ if(ME.style==='bun'){
+  t+=`<circle cx="141" cy="55" r="8.6" fill="${gfill('hair')}" stroke="${LN}" stroke-opacity=".8" stroke-width=".8"/><path d="M135.5 50Q141 47 146 52" fill="none" stroke="${lighten(HC,.35)}" stroke-width="1" stroke-opacity=".6"/>`;
+  t+=`<path d="M105 50C102 36 112 30 124 31C134 32 139 40 139 50C138.5 58 133 63 126 66C125 60 124.5 54 120.5 49C117 45 113 43.5 109 45C107 46 105.6 47.5 105 50Z" fill="${gfill('hair')}" stroke="${LN}" stroke-opacity=".8" stroke-width=".8"/>`;
+ }else{
+  t+=`<path d="${cap}" fill="${gfill('hair')}" stroke="${LN}" stroke-opacity=".8" stroke-width=".8"/>`;
+ }
+ t+=`<path d="M113 36C121 32 132 36 136 46" fill="none" stroke="${lighten(HC,.4)}" stroke-width="1.2" stroke-opacity=".55" stroke-linecap="round"/>`;
+
+ // 모자
+ if(H.style==='beret'){
+  t+=G('hat',H,'M97 55C94 38 106 23 124 23C143 23 152 42 148 68C134 57 113 51 97 55Z',false)+`<path d="M97.5 52C113 48 134 51 149 62" fill="none" stroke="${darken(H.color,.35)}" stroke-width="3"/>`+fl('M103 36C111 28 125 27 137 32',.6);
+ }else if(H.style==='cap'){
+  t+=G('hat',H,'M82 48C90 42 112 40 124 41C136 40 154 44 162 51C150 57 130 55 122 54C110 55 90 56 82 48Z',false);
+  t+=G('hat',H,'M104 48C102 34 112 24 124 24C136 24 142 34 140 48Q122 53 104 48Z',false)+`<path d="M104.5 44Q122 49 140 44" fill="none" stroke="${darken(H.color,.5)}" stroke-width="3.2"/>`;
+ }else if(H.style==='crown'){
+  t+=G('hat',H,'M105.5 50C112 44 122 43 134 47L134.5 52C122 49 112 50 105.8 55Z',false)+`<path d="M135 49C139 45 145 46 145 50C145 54 139 54 135 49Z" fill="${gfill('hat')}" stroke="${LN}" stroke-opacity=".8" stroke-width=".8"/><path d="M135 49C139 53 145 54 148 59L144 58Z" fill="${gfill('hat')}" stroke="${LN}" stroke-opacity=".8" stroke-width=".7"/>`;
+ }else if(H.style==='bow'){
+  t+=G('hat',H,'M132 42C124 33 137 27 140 35C141 40 137 43 132 42Z',false)+G('hat',H,'M132 42C141 38 146 46 141 50C137 52 133 47 132 42Z',false)+`<circle cx="132.5" cy="42.5" r="2.4" fill="${darken(H.color,.25)}" stroke="${LN}" stroke-opacity=".8" stroke-width=".7"/>`;
+ }
+
+ // 소품
+ if(A.style==='scarf'){
+  for(let i=0;i<=20;i++){
+   const q=i/20,m=1-q,x=m*m*112+2*m*q*120+q*q*129,y=m*m*95+2*m*q*210+q*q*93;
+   t+=`<circle cx="${n1(x)}" cy="${n1(y)}" r="2.5" fill="${A.color}" stroke="${darken(A.color,.4)}" stroke-width=".6"/><circle cx="${n1(x-.8)}" cy="${n1(y-.8)}" r=".75" fill="#fff" fill-opacity=".8"/>`;
+  }
+ }else if(A.style==='bag'){
+  t+=`<path d="M140 228C140 207 154 207 154 228" fill="none" stroke="${INK}" stroke-width="1.6" stroke-linecap="round"/>`
+   +G('acc',A,'M135 227L159 227L157 246Q147 249 137 246Z',false)+fl('M135.6 232L158.4 232',.6)+`<circle cx="147" cy="233.5" r="1.5" fill="#d7a84a" stroke="${LN}" stroke-width=".5"/>`;
+ }else if(A.style==='badge'){
+  t+=`<ellipse cx="103.5" cy="110.5" rx="5" ry="2.2" transform="rotate(-30 103.5 110.5)" fill="#3f9a62" stroke="${LN}" stroke-opacity=".7" stroke-width=".6"/><circle cx="108" cy="108" r="4.6" fill="${A.color}" stroke="${LN}" stroke-opacity=".8" stroke-width=".7"/><path d="M108 105.6C110.4 105 111.4 107.6 109.6 108.8C108 109.8 106 108.4 107 106.8" fill="none" stroke="${darken(A.color,.45)}" stroke-width=".8"/>`;
+ }else if(A.style==='tie'){
+  t+=`<path d="M121 101C113 93 105 97 106.5 103C108 108.5 115 106.5 121 101Z" fill="${gfill('acc')}" stroke="${LN}" stroke-opacity=".8" stroke-width=".8"/><path d="M121 101C129 93 137 97 135.5 103C134 108.5 127 106.5 121 101Z" fill="${gfill('acc')}" stroke="${LN}" stroke-opacity=".8" stroke-width=".8"/><path d="M119.5 103L115 116L120.5 112Z M122.5 103L127 116L121.8 112Z" fill="${gfill('acc')}" stroke="${LN}" stroke-opacity=".8" stroke-width=".7"/><circle cx="121" cy="101.5" r="2.4" fill="${darken(A.color,.2)}" stroke="${LN}" stroke-opacity=".8" stroke-width=".7"/>`;
+ }else if(A.style==='umbrella'){
+  t+=`<path d="M148.4 203C148.4 195 141.6 195 142 201" fill="none" stroke="${INK}" stroke-width="2" stroke-linecap="round"/>`
+   +`<path d="M147 205L151 205L167 312L162.6 313Z" fill="${gfill('acc')}" stroke="${LN}" stroke-opacity=".85" stroke-width=".9" stroke-linejoin="round"/><path d="M149 205L165 312" stroke="${LN}" stroke-opacity=".45" stroke-width=".6"/><path d="M162.6 313L164.8 330" stroke="${INK}" stroke-width="1.3" stroke-linecap="round"/>`;
+ }
+ t+='</g>';
+ // 종이 질감 + 테두리
+ t+=`<g clip-path="url(#${u}clip)"><rect width="240" height="360" fill="url(#gb-grain)"/></g><rect x=".6" y=".6" width="238.8" height="358.8" rx="11.5" fill="none" stroke="${LN}" stroke-opacity=".55" stroke-width="1.2"/></svg>`;
  return t;
 }
-function outfitSVG(o){
- const P=o.parts,sk='#f6d9bd',ink='#2b2b3a';
- const sc=(x,y,w,h,r)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${sk}" stroke="${ink}" stroke-width="1.6"/>`;
- let t=`<svg viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="옷 디자인">`+patDefs();
- t+=`<ellipse cx="100" cy="306" rx="60" ry="7" fill="#000" fill-opacity=".08"/>`;
- // 망토(뒤)
- if(P.cape.style==='short')t+=shp('M70 86 L130 86 L148 204 L52 204 Z',P.cape);
- else if(P.cape.style==='long')t+=shp('M70 86 L130 86 L160 294 L40 294 Z',P.cape);
- // 몸
- t+=sc(80,160,18,132,8)+sc(102,160,18,132,8);
- t+=`<ellipse cx="89" cy="294" rx="14" ry="6" fill="#33333c"/><ellipse cx="111" cy="294" rx="14" ry="6" fill="#33333c"/>`;
- t+=sc(50,92,18,72,9)+sc(132,92,18,72,9);
- t+=sc(70,84,60,86,12)+sc(92,70,16,20,4);
- t+=`<circle cx="100" cy="46" r="26" fill="${sk}" stroke="${ink}" stroke-width="1.6"/>`;
- t+=`<path d="M74 44 Q74 18 100 18 Q126 18 126 44 Q116 30 100 30 Q84 30 74 44 Z" fill="#5b3a29"/>`;
- t+=`<circle cx="91" cy="48" r="2.2" fill="${ink}"/><circle cx="109" cy="48" r="2.2" fill="${ink}"/>`;
- t+=`<path d="M94 58 Q100 63 106 58" fill="none" stroke="${ink}" stroke-width="1.6" stroke-linecap="round"/>`;
- t+=`<circle cx="86" cy="56" r="3.5" fill="#f2a29a" fill-opacity=".5"/><circle cx="114" cy="56" r="3.5" fill="#f2a29a" fill-opacity=".5"/>`;
- // 하의
- const b=P.bottom;
- if(b.style==='skirt')t+=shp('M70 164 L130 164 L148 236 L52 236 Z',b);
- else if(b.style==='long')t+=shp('M70 164 L130 164 L156 288 L44 288 Z',b);
- else if(b.style==='pants')t+=shp('M72 164 L101 164 L99 290 L77 290 Z',b)+shp('M99 164 L128 164 L123 290 L101 290 Z',b);
- else if(b.style==='shorts')t+=shp('M72 164 L101 164 L100 218 L74 218 Z',b)+shp('M99 164 L128 164 L126 218 L100 218 Z',b);
- // 상의
- const o1=P.top;
- if(o1.style==='tee')t+=shp('M68 86 L50 90 L46 104 L54 128 L70 118 Z',o1)+shp('M132 86 L150 90 L154 104 L146 128 L130 118 Z',o1);
- else if(o1.style==='long')t+=shp('M68 86 L50 90 L46 104 L48 166 L66 166 L70 120 Z',o1)+shp('M132 86 L150 90 L154 104 L152 166 L134 166 L130 120 Z',o1);
- t+=o1.style==='vest'?shp('M72 86 Q100 98 128 86 L128 170 L72 170 Z',o1):shp('M68 86 Q100 98 132 86 L132 170 L68 170 Z',o1);
- // 망토 여밈
- if(P.cape.style!=='none')t+=`<circle cx="100" cy="92" r="5" fill="#f4d35e" stroke="${ink}" stroke-width="1.4"/>`;
- // 소품
- const a=P.acc,ap={color:a.color,pattern:'none'};
- if(a.style==='scarf')t+=shp('M82 76 Q100 90 118 76 L120 90 Q100 104 80 90 Z',ap)+shp('M104 92 L118 92 L122 128 L106 126 Z',ap);
- else if(a.style==='bag')t+=`<path d="M130 88 L62 164" stroke="${a.color}" stroke-width="3.5" fill="none" stroke-linecap="round"/>`+`<rect x="40" y="158" width="28" height="28" rx="4" fill="${a.color}" stroke="${ink}" stroke-width="1.6"/>`;
- else if(a.style==='badge')t+=shp('M86 100 L90 109 L100 110 L92.5 116.5 L95 126 L86 121 L77 126 L79.5 116.5 L72 110 L82 109 Z',ap);
- else if(a.style==='tie')t+=shp('M100 92 L84 84 L84 100 Z',ap)+shp('M100 92 L116 84 L116 100 Z',ap)+`<circle cx="100" cy="92" r="3.5" fill="${a.color}" stroke="${ink}" stroke-width="1.4"/>`;
- // 모자
- const h=P.hat;
- if(h.style==='beret')t+=shp('M72 30 Q74 8 104 10 Q128 12 130 30 Q100 22 72 30 Z',h)+`<circle cx="104" cy="9" r="3.5" fill="${h.color}" stroke="${ink}" stroke-width="1.4"/>`;
- else if(h.style==='cap')t+=shp('M74 32 Q76 8 100 8 Q124 8 126 32 Z',h)+shp('M120 30 L152 34 Q152 41 120 38 Z',h,true);
- else if(h.style==='crown')t+=shp('M74 28 L74 8 L87 19 L100 4 L113 19 L126 8 L126 28 Z',h);
- else if(h.style==='bow')t+=shp('M116 22 L134 12 L134 32 Z',h)+shp('M116 22 L98 12 L98 32 Z',h)+`<circle cx="116" cy="22" r="5" fill="${h.color}" stroke="${ink}" stroke-width="1.4"/>`;
- return t+'</svg>';
-}
+
 function entryLabel(e){return e.title||(e.type==='diary'?e.date+' 일기':'(제목 없음)');}
+/* ===== v0.5 옷: 그림 부품을 겹쳐서 입히기 ===== */
+const IW=800,IH=1192;
+const G={
+ top:{name:'상의',items:[['none','안 입기'],['tunic','긴 튜닉']],file:{tunic:'top-tunic.webp'},pat:true},
+ bottom:{name:'하의',items:[['skirt','주름 치마'],['long','롱 스커트'],['pants','와이드 팬츠']],file:{skirt:'bot-skirt.webp',long:'bot-long.webp',pants:'bot-pants.webp'},pat:true},
+ cape:{name:'망토',items:[['none','없음'],['cape','어깨 망토']],file:{cape:'cape.webp'},pat:true},
+ hat:{name:'모자',items:[['none','없음'],['cloche','클로슈'],['beret','베레모'],['crown','왕관']],file:{cloche:'hat-cloche.webp',beret:'hat-beret.webp',crown:'hat-crown.webp'},pat:false},
+ acc:{name:'소품',multi:true,items:[['pearls','진주 목걸이'],['gloves','긴 장갑'],['bag','손가방'],['parasol','양산']],file:{pearls:'acc-pearls.webp',gloves:'acc-gloves.webp',bag:'acc-bag.webp',parasol:'acc-parasol.webp'},pat:false},
+ scene:{name:'배경',nocolor:true,items:[['cloud','구름 하늘'],['pink','분홍 노을'],['garden','나무와 들판'],['paper','종이 배경']],file:{cloud:'bg-cloud.webp',pink:'bg-pink.webp',garden:'bg-garden.webp',paper:'bg-paper.webp'}}
+};
+const GCOL=[['#f3ead2','크림'],['#e9aaa3','연분홍'],['#d1604a','산호'],['#b23a48','딸기'],['#d7a84a','겨자'],['#8fbfae','민트'],['#2f8d82','청록'],['#7fa7d6','하늘'],['#4272b3','파랑'],['#7d5a9b','보라'],['#8a5a44','갈색'],['#4a4a55','먹색']];
+const GPAT=[['none','무늬 없음'],['lines','줄무늬'],['dot','물방울'],['floral','꽃무늬'],['check','체크'],['zig','지그재그']];
+const SAMPLES=[['sailor','푸른 세일러 원피스'],['rose','장밋빛 외투'],['mustard','겨자색 스웨터'],['coral','산호빛 물방울'],['flapper','크림 레이스 드레스']];
+const IMGS={};
+function loadImg(f){return IMGS[f]||(IMGS[f]=new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=f;}));}
+function newOutfit2(){
+ return {v:2,note:'',parts:{
+  top:{id:'tunic',color:'#e9aaa3',pattern:'none'},
+  bottom:{id:'skirt',color:'#8fbfae',pattern:'none'},
+  cape:{id:'none',color:'#d7a84a',pattern:'none'},
+  hat:{id:'none',color:'#f3ead2',pattern:'none'},
+  acc:{ids:[],color:'#f3ead2',pattern:'none'},
+  scene:{id:'cloud'}}};
+}
+function tileFor(kind,col){
+ const dark=lum(col)>0.55,ink=dark?darken(col,0.28):lighten(col,0.35);
+ const S=kind==='check'?64:kind==='lines'?40:kind==='zig'?48:60;
+ const c=document.createElement('canvas');c.width=c.height=S;const x=c.getContext('2d');
+ x.fillStyle=col;x.fillRect(0,0,S,S);x.fillStyle=ink;x.strokeStyle=ink;
+ if(kind==='lines'){x.fillRect(0,S*0.35,S,S*0.28);}
+ else if(kind==='dot'){[[S*.25,S*.25],[S*.75,S*.75]].forEach(([a,b])=>{x.beginPath();x.arc(a,b,S*.11,0,7);x.fill();});}
+ else if(kind==='floral'){[[S*.27,S*.27],[S*.77,S*.7]].forEach(([a,b])=>{for(let k=0;k<5;k++){const t=k*Math.PI*2/5;x.beginPath();x.arc(a+Math.cos(t)*S*.08,b+Math.sin(t)*S*.08,S*.06,0,7);x.fill();}x.fillStyle=dark?lighten(col,.6):darken(col,.5);x.beginPath();x.arc(a,b,S*.03,0,7);x.fill();x.fillStyle=ink;});}
+ else if(kind==='check'){x.fillRect(0,0,S/2,S/2);x.fillRect(S/2,S/2,S/2,S/2);}
+ else if(kind==='zig'){x.lineWidth=S*.1;x.beginPath();for(let i=0;i<=4;i++){const px=i*S/4,py=i%2?S*.35:S*.65;i?x.lineTo(px,py):x.moveTo(px,py);}x.stroke();}
+ return c;
+}
+async function paintOutfit(cv,o){
+ cv.width=IW;cv.height=IH;const x=cv.getContext('2d');
+ const P=o.parts,order=[['scene'],['base'],['bottom'],['top'],['cape'],['acc','pearls'],['acc','gloves'],['hat'],['acc','bag'],['acc','parasol']];
+ const jobs=[];
+ for(const [k,sub] of order){
+  if(k==='base'){jobs.push({f:'base.webp'});continue;}
+  const p=P[k],g=G[k];
+  if(k==='acc'){if(!p.ids.includes(sub))continue;jobs.push({f:g.file[sub],tint:sub==='pearls'?null:p});continue;}
+  if(!p.id||p.id==='none')continue;
+  jobs.push({f:g.file[p.id],tint:k==='scene'?null:p});
+ }
+ const imgs=await Promise.all(jobs.map(j=>loadImg(j.f)));
+ x.clearRect(0,0,IW,IH);x.fillStyle='#f6efdc';x.fillRect(0,0,IW,IH);
+ const t=document.createElement('canvas');t.width=IW;t.height=IH;const tx=t.getContext('2d');
+ jobs.forEach((j,i)=>{
+  const im=imgs[i];if(!im)return;
+  if(!j.tint||j.tint.color==='#f3ead2'&&j.tint.pattern==='none'){x.drawImage(im,0,0,IW,IH);return;}
+  tx.globalCompositeOperation='source-over';tx.clearRect(0,0,IW,IH);tx.drawImage(im,0,0,IW,IH);
+  tx.globalCompositeOperation='multiply';
+  if(j.tint.pattern&&j.tint.pattern!=='none'){tx.fillStyle=tx.createPattern(tileFor(j.tint.pattern,j.tint.color),'repeat');}
+  else tx.fillStyle=j.tint.color;
+  tx.fillRect(0,0,IW,IH);
+  tx.globalCompositeOperation='destination-in';tx.drawImage(im,0,0,IW,IH);
+  tx.globalCompositeOperation='source-over';x.drawImage(t,0,0);
+ });
+}
+const OURL=new Map();
+async function outfitURL(e){const c=document.createElement('canvas');await paintOutfit(c,e.outfit);const u=c.toDataURL('image/jpeg',0.9);OURL.set(e.id,u);return u;}
+function outfitCard(e){
+ if(e.outfit&&e.outfit.v===2)return `<canvas class="oimg" data-pc="${e.id}"></canvas>`;
+ return outfitSVG(e.outfit);
+}
+function paintCards(){app.querySelectorAll('canvas[data-pc]').forEach(c=>{const e=entries.find(x=>x.id===c.dataset.pc);if(e)paintOutfit(c,e.outfit);});}
+
+
+const CROP={top:[225,170,430],bottom:[230,500,432],cape:[230,150,420],hat:[290,20,320],pearls:[250,250,340],gloves:[250,240,380],bag:[200,440,420],parasol:[190,440,460]};
+function tintedCanvas(im,t){
+ const c=document.createElement('canvas');c.width=IW;c.height=IH;const x=c.getContext('2d');
+ x.drawImage(im,0,0,IW,IH);x.globalCompositeOperation='multiply';
+ x.fillStyle=(t.pattern&&t.pattern!=='none')?x.createPattern(tileFor(t.pattern,t.color),'repeat'):t.color;
+ x.fillRect(0,0,IW,IH);x.globalCompositeOperation='destination-in';x.drawImage(im,0,0,IW,IH);return c;
+}
+async function paintThumb(cv,part,id,o){
+ const x=cv.getContext('2d'),W=cv.width,Hh=cv.height;
+ x.fillStyle='#f3ead3';x.fillRect(0,0,W,Hh);
+ const g=G[part];
+ if(part==='scene'){const im=await loadImg(g.file[id]);if(im)x.drawImage(im,0,0,800,1000,0,0,W,Hh);return;}
+ const c=CROP[part==='acc'?id:part],sw=c[2],sh=sw*1.25;
+ const base=await loadImg('base.webp');if(base)x.drawImage(base,c[0],c[1],sw,sh,0,0,W,Hh);
+ if(id==='none'){x.fillStyle='rgba(120,90,70,.55)';x.font='bold 70px sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('✕',W/2,Hh/2);return;}
+ const im=await loadImg(g.file[id]);if(!im)return;
+ const cp=o.parts[part];
+ const useTint=!(part==='acc'&&id==='pearls')&&cp.color&&!(cp.color==='#f3ead2'&&cp.pattern==='none');
+ x.drawImage(useTint?tintedCanvas(im,cp):im,c[0],c[1],sw,sh,0,0,W,Hh);
+}
+function paintThumbs(o,part){
+ $('#ctl').querySelectorAll('canvas.th').forEach(cv=>paintThumb(cv,cv.dataset.tp,cv.dataset.tid,o));
+ const cp=o.parts[part];
+ $('#ctl').querySelectorAll('canvas[data-pk]').forEach(cv=>{
+  const x=cv.getContext('2d'),k=cv.dataset.pk,col=cp.color||'#f3ead2';
+  if(k==='none'){x.fillStyle=col;x.fillRect(0,0,112,112);x.fillStyle='rgba(60,40,30,.5)';x.font='bold 56px sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('✕',56,58);}
+  else{x.fillStyle=x.createPattern(tileFor(k,col),'repeat');x.fillRect(0,0,112,112);}
+ });
+}
+const HERO={v:2,note:'',parts:{top:{id:'tunic',color:'#8fbfae',pattern:'none'},bottom:{id:'long',color:'#f3ead2',pattern:'none'},cape:{id:'none',color:'#d7a84a',pattern:'none'},hat:{id:'cloche',color:'#e9aaa3',pattern:'none'},acc:{ids:['pearls','bag'],color:'#f3ead2',pattern:'none'},scene:{id:'cloud'}}};
 let dPart='top';
 function renderDesigner(e){
  cur=e;onResize=null;
- if(!e.outfit)e.outfit=newOutfit();
+ if(!e.outfit||e.outfit.v!==2){const old=e.outfit;e.outfit=newOutfit2();if(old&&old.note)e.outfit.note=old.note;}
  const o=e.outfit;
  const hint=e.type==='diary'
   ?`오늘 하루에 어울리는 옷을 만들어 줘!${e.mood||e.weather?' (오늘은 '+(e.weather||'')+' '+(e.mood||'')+')':''}`
@@ -259,36 +616,42 @@ function renderDesigner(e){
   <header class="bar"><button class="ghost" id="back">← 나중에 할게</button><span id="saved"></span></header>
   <h1>👗 옷 만들기</h1>
   <div class="bubble"><span class="ic">💬</span><div><b>${esc(entryLabel(e))}</b><p>${esc(hint)}</p></div></div>
-  <div class="designer"><div class="stagebox" id="pv"></div><div id="ctl"></div></div>
+  <div class="designer"><div class="stagebox" id="pv"><canvas class="oimg" id="cv"></canvas></div><div id="ctl"></div></div>
   <label class="f" style="margin-top:14px">이 옷을 이렇게 만든 이유 (한 줄)<input id="o-note" maxlength="120" value="${esc(o.note)}" placeholder="예: 겁이 많지만 마지막에 용감해져서 망토를 빨갛게 했어요"></label>
   <footer class="nav"><span></span><button class="primary" id="fin">옷 완성! 옷장에 걸기</button></footer>
  </div>`;
+ const order=['top','bottom','cape','hat','acc','scene'];
+ let busy=false,again=false;
+ const paint=async()=>{if(busy){again=true;return;}busy=true;do{again=false;await paintOutfit($('#cv'),o);}while(again);busy=false;};
+const EMO={top:'👚',bottom:'👗',cape:'🧣',hat:'🎩',acc:'💍',scene:'🌤'};
  const draw=()=>{
-  $('#pv').innerHTML=outfitSVG(o);
-  const part=PARTS.find(p=>p.k===dPart),cp=o.parts[dPart];
+  const g=G[dPart],cp=o.parts[dPart];
+  const on=g.multi?(v=>cp.ids.includes(v)):(v=>cp.id===v);
+  const hasItem=g.multi?cp.ids.length>0:(cp.id&&cp.id!=='none');
   $('#ctl').innerHTML=`
-   <div class="ptabs">${PARTS.map(p=>`<button class="ptab ${p.k===dPart?'on':''}" data-part="${p.k}">${p.name}</button>`).join('')}</div>
-   <div class="lbl">모양</div>
-   <div class="opts">${part.styles.map(([v,n])=>`<button data-style="${v}" class="${cp.style===v?'on':''}">${n}</button>`).join('')}</div>
-   ${cp.style==='none'?'':`<div class="lbl">색깔</div>
-   <div class="opts">${COLORS.map(([c,n])=>`<button class="sw ${cp.color===c?'on':''}" data-color="${c}" style="background:${c}" aria-label="${n}"></button>`).join('')}</div>`}
-   ${part.pat&&cp.style!=='none'?`<div class="lbl">무늬</div>
-   <div class="opts">${PATS.map(([v,n])=>`<button data-pat="${v}" class="${cp.pattern===v?'on':''}">${n}</button>`).join('')}</div>`:''}`;
+   <div class="ptabs">${order.map(k=>`<button class="ptab ${k===dPart?'on':''}" data-part="${k}"><span>${EMO[k]}</span>${G[k].name}</button>`).join('')}</div>
+   <div class="lbl">${g.multi?'마음에 드는 걸 모두 골라 봐 (여러 개 가능)':'어떤 모양으로 할까?'}</div>
+   <div class="cards">${g.items.map(([v,n])=>`<button class="ic2 ${on(v)?'on':''}" data-item="${v}"><canvas class="th" data-tp="${dPart}" data-tid="${v}" width="200" height="250"></canvas><span>${n}</span></button>`).join('')}</div>
+   ${(g.nocolor||!hasItem)?'':`<div class="lbl">${dPart==='acc'?'무슨 색으로 할까? (진주는 그대로)':'무슨 색으로 할까?'}</div>
+   <div class="opts">${GCOL.map(([c,n])=>`<button class="sw ${cp.color===c?'on':''}" data-color="${c}" style="background:${c}" aria-label="${n}" title="${n}"></button>`).join('')}</div>`}
+   ${(g.pat&&hasItem)?`<div class="lbl">무늬를 넣어 볼까?</div>
+   <div class="opts pats">${GPAT.map(([v,n])=>`<button data-pat="${v}" class="pt ${cp.pattern===v?'on':''}"><canvas data-pk="${v}" width="112" height="112"></canvas><span>${n}</span></button>`).join('')}</div>`:''}`;
+  paintThumbs(o,dPart);
  };
  $('#ctl').onclick=ev=>{
   const b=ev.target.closest('button');if(!b)return;
-  const cp=o.parts[dPart];
+  const cp=o.parts[dPart],g=G[dPart];
   if(b.dataset.part)dPart=b.dataset.part;
-  else if(b.dataset.style!==undefined)cp.style=b.dataset.style;
+  else if(b.dataset.item!==undefined){const v=b.dataset.item;if(g.multi){const i=cp.ids.indexOf(v);i<0?cp.ids.push(v):cp.ids.splice(i,1);}else cp.id=v;}
   else if(b.dataset.color)cp.color=b.dataset.color;
   else if(b.dataset.pat)cp.pattern=b.dataset.pat;
   else return;
-  draw();touch();
+  draw();paint();touch();
  };
  $('#o-note').oninput=ev=>{o.note=ev.target.value;touch();};
  $('#back').onclick=async()=>{await flush();renderHome();};
  $('#fin').onclick=async()=>{await flush();renderCloset();toast('옷장에 걸었어요 👗');};
- draw();
+ draw();paint();
 }
 function renderCloset(){
  cur=null;onResize=null;
@@ -299,29 +662,39 @@ function renderCloset(){
   <h1>👗 내 옷장 (${withO.length})</h1>
   <div class="grid">
    ${need.map(e=>`<button class="oc new" data-mk="${e.id}"><div style="font-size:34px">✨</div><div class="t">옷 만들기</div><div style="font-size:13px">${esc(entryLabel(e))}</div></button>`).join('')}
-   ${withO.map(e=>`<button class="oc" data-ed="${e.id}">${outfitSVG(e.outfit)}<div class="t">${esc(entryLabel(e))}</div><div style="font-size:12px;color:var(--sub)">${esc(e.date)}</div></button>`).join('')}
+   ${withO.map(e=>`<button class="oc" data-ed="${e.id}">${outfitCard(e)}<div class="t">${esc(entryLabel(e))}</div><div style="font-size:12px;color:var(--sub)">${esc(e.date)}</div></button>`).join('')}
   </div>
   ${withO.length||need.length?'':'<p style="color:var(--sub)">글을 다 쓰면 옷을 만들 수 있어요.</p>'}
+  <h2 style="margin-top:22px">🎀 예쁜 옷 구경</h2>
+  <p style="margin:0 0 6px;font-size:14px;color:var(--sub)">옛날 파리 아가씨들의 옷이에요. 구경하고 아이디어를 얻어 봐!</p>
+  <div class="grid">${SAMPLES.map(([k,n])=>`<div class="oc"><img src="plate-${k}.webp" alt="${n}" loading="lazy"><div class="t">${n}</div></div>`).join('')}</div>
  </div>`;
  $('#back').onclick=renderHome;
  app.querySelectorAll('[data-mk],[data-ed]').forEach(b=>b.onclick=()=>{
   dPart='top';renderDesigner(entries.find(e=>e.id===(b.dataset.mk||b.dataset.ed)));
  });
+ paintCards();
 }
 
 /* ===== 그리기 ===== */
 const PW=1000,PH=700;
-function segment(c,s,st,a,b){
- c.strokeStyle=st.c;
- c.lineWidth=st.w*(0.6+0.8*(a[2]+b[2])/2)*s;
- c.beginPath();c.moveTo(a[0]*s,a[1]*s);c.lineTo(b[0]*s,b[1]*s);c.stroke();
+const mid=(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2];
+function wid(st,pr,s){return st.w*(0.6+0.8*pr)*s;}
+function seg2(c,s,st,a,b,pr){ // a→b 직선
+ c.strokeStyle=st.c;c.lineWidth=wid(st,pr,s);c.beginPath();c.moveTo(a[0]*s,a[1]*s);c.lineTo(b[0]*s,b[1]*s);c.stroke();
+}
+function curve(c,s,st,p0,p1,p2){ // p1을 지나가는 부드러운 곡선 (p0-p1, p1-p2 중간점 사이)
+ const m1=mid(p0,p1),m2=mid(p1,p2);
+ c.strokeStyle=st.c;c.lineWidth=wid(st,p1[2],s);c.beginPath();c.moveTo(m1[0]*s,m1[1]*s);c.quadraticCurveTo(p1[0]*s,p1[1]*s,m2[0]*s,m2[1]*s);c.stroke();
 }
 function drawStrokes(c,s,strokes){
  c.lineCap='round';c.lineJoin='round';
  for(const st of strokes){
-  const p=st.pts;
-  if(p.length===1){c.fillStyle=st.c;c.beginPath();c.arc(p[0][0]*s,p[0][1]*s,st.w*(0.6+0.8*p[0][2])*s/2,0,Math.PI*2);c.fill();continue;}
-  for(let i=1;i<p.length;i++)segment(c,s,st,p[i-1],p[i]);
+  const p=st.pts,n=p.length;
+  if(n===1){c.fillStyle=st.c;c.beginPath();c.arc(p[0][0]*s,p[0][1]*s,wid(st,p[0][2],s)/2,0,Math.PI*2);c.fill();continue;}
+  seg2(c,s,st,p[0],mid(p[0],p[1]),p[0][2]);
+  for(let i=1;i<n-1;i++)curve(c,s,st,p[i-1],p[i],p[i+1]);
+  seg2(c,s,st,mid(p[n-2],p[n-1]),p[n-1],p[n-1][2]);
  }
 }
 function drawRules(c,s){
@@ -375,35 +748,46 @@ function mountPen(box,step,onChange){
   step.pages[pi]=page().filter(st=>!st.pts.some(q=>Math.hypot(q[0]-p[0],q[1]-p[1])<R));
   if(page().length!==before){erased=true;redraw();}
  }
+ let aid=null; // 지금 쓰고 있는 손가락/펜 하나만 따라간다 (손바닥이 끼어들지 못하게)
+ try{if(localStorage.getItem('gulbang_pen')==='1')penSeen=true;}catch(_){}
+ const cancelStroke=()=>{if(drawing&&!drawing.erase){const i=page().indexOf(drawing);if(i>=0)page().splice(i,1);redraw();}drawing=null;aid=null;};
  cv.addEventListener('pointerdown',e=>{
-  if(e.pointerType==='pen')penSeen=true;
-  if(e.pointerType==='touch'&&penSeen)return; // 손바닥 무시
-  e.preventDefault();cv.setPointerCapture(e.pointerId);
+  if(e.pointerType==='pen'&&!penSeen){penSeen=true;try{localStorage.setItem('gulbang_pen','1');}catch(_){}}
+  if(e.pointerType==='touch'&&penSeen)return; // 펜을 쓰는 중이면 손바닥·손가락 무시
+  if(aid!==null){ if(e.pointerType==='pen')cancelStroke(); else return; }
+  e.preventDefault();try{cv.setPointerCapture(e.pointerId);}catch(_){}aid=e.pointerId;
   const p=pt(e);
   if(tool==='eraser'){drawing={erase:true};erased=false;erase(p);}
   else{
-   const st={c:color,w:3.5,pts:[p]};page().push(st);drawing=st;
-   ctx.fillStyle=color;ctx.beginPath();ctx.arc(p[0]*scale(),p[1]*scale(),st.w*1.0*scale()/2,0,Math.PI*2);ctx.fill();
+   const st={c:color,w:4,pts:[p]};page().push(st);drawing=st;
+   ctx.lineCap='round';ctx.fillStyle=color;ctx.beginPath();ctx.arc(p[0]*scale(),p[1]*scale(),wid(st,p[2],scale())/2,0,Math.PI*2);ctx.fill();
   }
  });
  cv.addEventListener('pointermove',e=>{
-  if(!drawing)return;
+  if(!drawing||e.pointerId!==aid)return;
   e.preventDefault();
   const evs=e.getCoalescedEvents?e.getCoalescedEvents():[e];
   for(const ev of (evs.length?evs:[e])){
    const p=pt(ev);
    if(drawing.erase){erase(p);continue;}
-   const a=drawing.pts[drawing.pts.length-1];
-   drawing.pts.push(p);
-   ctx.lineCap='round';segment(ctx,scale(),drawing,a,p);
+   const q=drawing.pts,l=q[q.length-1];
+   if(Math.hypot(p[0]-l[0],p[1]-l[1])<0.8)continue; // 너무 가까운 점은 버림
+   q.push(p);
+   ctx.lineCap='round';ctx.lineJoin='round';
+   const n=q.length;
+   if(n===2)seg2(ctx,scale(),drawing,q[0],mid(q[0],q[1]),q[0][2]);
+   else curve(ctx,scale(),drawing,q[n-3],q[n-2],q[n-1]);
   }
  });
- const end=()=>{
-  if(!drawing)return;
-  const wasErase=drawing.erase;drawing=null;
+ const end=e=>{
+  if(!drawing||(e&&e.pointerId!==aid))return;
+  const wasErase=drawing.erase;drawing=null;aid=null;
+  if(!wasErase)redraw(); // 끝까지 매끄럽게 다시 그리기
   if(!wasErase||erased)onChange();
  };
  cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
+ ['touchstart','touchmove'].forEach(t=>cv.addEventListener(t,e=>e.preventDefault(),{passive:false}));
+ ['gesturestart','contextmenu','selectstart'].forEach(t=>cv.addEventListener(t,e=>e.preventDefault()));
  box.addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
   if(b.dataset.t){tool=b.dataset.t;box.querySelectorAll('[data-t]').forEach(x=>x.classList.toggle('on',x===b));}
@@ -433,7 +817,7 @@ function renderHome(){
  const banner=(entries.length&&(d===null||d>=30))
   ?`<div class="banner"><span>💾 ${d===null?'아직 백업한 적이 없어요.':d+'일 전에 백업했어요.'} 소중한 글이라 한 달에 한 번은 백업해 두자.</span><button class="ghost" id="goBackup">백업하기</button></div>`:'';
  app.innerHTML=`<div class="wrap">
-  <h1>✒️ 진윤이의 글방</h1>${banner}
+  <div class="hero"><canvas id="hero"></canvas><div><h1>진윤이의 글방</h1><p class="tag">읽고, 쓰고, 옷도 짓는<br>나만의 작은 방</p><div class="orn">❦</div></div></div>${banner}
   <div class="big">
    <button data-new="report">📖<b>독후감 쓰기</b></button>
    <button data-new="diary">📔<b>일기 쓰기</b></button>
@@ -442,7 +826,7 @@ function renderHome(){
   <ul class="list">${list.map(e=>`<li>
    <button class="item" data-open="${e.id}"><span class="ic">${TYPE_ICON[e.type]}</span><span><div class="t">${esc(e.title||(e.type==='diary'?e.date+' 일기':'(제목 없음)'))}${e.done?' ✅':''}${e.outfit?' 👗':''}</div><div class="s">${TYPE_NAME[e.type]} · ${e.date} · ${esc(preview(e))}</div></span></button>
    <button class="del" data-del="${e.id}" aria-label="삭제">🗑</button></li>`).join('')||'<li style="color:var(--sub)">아직 쓴 글이 없어요. 위 버튼으로 시작해 보자!</li>'}</ul>
- <div class="ver">진윤이의 글방 v0.2</div>
+ <div class="ver">진윤이의 글방 v0.6</div>
  </div>`;
  app.querySelectorAll('[data-new]').forEach(b=>b.onclick=()=>{cur=newEntry(b.dataset.new);stepIdx=0;renderEditor();});
  app.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{cur=entries.find(e=>e.id===b.dataset.open);stepIdx=0;renderEditor();});
@@ -452,6 +836,7 @@ function renderHome(){
  });
  $('#toExport').onclick=renderExport;
  $('#toCloset').onclick=renderCloset;
+ paintOutfit($('#hero'),HERO);
  const g=$('#goBackup');if(g)g.onclick=renderExport;
 }
 
@@ -585,7 +970,7 @@ function buildPrint(list){
    if(!imgs&&!txt)return '';
    return (e.type==='report'?`<h3>${i+1}. ${esc(defs[i].name)}</h3>`:'')+imgs+(imgs&&txt?'':'')+txt;
   }).join('');
-  const ob=e.outfit?`<div style="text-align:center;page-break-inside:avoid;margin-top:14pt"><div style="width:46mm;margin:0 auto">${outfitSVG(e.outfit)}</div>${e.outfit.note.trim()?`<p>${esc(e.outfit.note.trim())}</p>`:''}</div>`:'';
+  const ob=e.outfit?`<div style="text-align:center;page-break-inside:avoid;margin-top:14pt"><div style="width:46mm;margin:0 auto">${e.outfit.v===2?`<img src="${OURL.get(e.id)||''}" style="width:100%">`:outfitSVG(e.outfit)}</div>${e.outfit.note.trim()?`<p>${esc(e.outfit.note.trim())}</p>`:''}</div>`:'';
   return `<section class="pe">${head}${body}${ob}</section>`;
  }).join('');
 }
@@ -617,8 +1002,9 @@ function renderExport(){
  ['x-type','x-from','x-to'].forEach(id=>$('#'+id).onchange=cnt);cnt();
  $('#back').onclick=renderHome;
  $('#x-md').onclick=()=>{const l=filtered();if(!l.length)return toast('내보낼 글이 없어요');download(`글방_${stamp()}.md`,toMd(l),'text/markdown');};
- $('#x-pdf').onclick=()=>{
+ $('#x-pdf').onclick=async()=>{
   const l=filtered();if(!l.length)return toast('내보낼 글이 없어요');
+  for(const e of l)if(e.outfit&&e.outfit.v===2)await outfitURL(e);
   $('#print').innerHTML=buildPrint(l);
   window.onafterprint=()=>{$('#print').innerHTML='';window.onafterprint=null;};
   setTimeout(()=>window.print(),150);
@@ -645,6 +1031,7 @@ function renderExport(){
 }
 
 /* ===== 시작 ===== */
+ensureGrain();
 if('serviceWorker' in navigator)window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});
 (async function init(){
  try{

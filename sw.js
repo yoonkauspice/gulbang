@@ -1,10 +1,29 @@
-const CACHE='jinyoon-quest-v18';
-const FILES=['./','index.html','manifest.webmanifest','model.json','icon-192.png','icon-512.png','apple-touch-icon.png'];
-self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)));self.skipWaiting();});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));self.clients.claim();});
-// 네트워크 우선, 실패하면 캐시(개발 중 업데이트가 바로 반영되고 오프라인에서도 열림)
-self.addEventListener('fetch',e=>{
-  if(e.request.method!=='GET')return;
-  e.respondWith(fetch(e.request).then(r=>{const cp=r.clone();caches.open(CACHE).then(c=>c.put(e.request,cp));return r;})
-    .catch(()=>caches.match(e.request).then(m=>m||caches.match('index.html'))));
+const V = 'gulbang-v0.6';
+const FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png',
+  'base.webp','top-tunic.webp','bot-skirt.webp','bot-long.webp','bot-pants.webp','cape.webp','hat-cloche.webp','hat-beret.webp','hat-crown.webp','acc-pearls.webp','acc-gloves.webp','acc-bag.webp','acc-parasol.webp','bg-cloud.webp','bg-pink.webp','bg-garden.webp','bg-paper.webp','plate-sailor.webp','plate-rose.webp','plate-mustard.webp','plate-coral.webp','plate-flapper.webp'];
+
+self.addEventListener('install', e => {
+  e.waitUntil(caches.open(V).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
+});
+
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys()
+      .then(ks => Promise.all(ks.filter(k => k !== V).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
+  );
+});
+
+// 캐시를 먼저 보여 주고, 뒤에서 새 파일을 받아 다음 실행 때 반영한다.
+self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+  e.respondWith(
+    caches.open(V).then(async c => {
+      const hit = await c.match(e.request);
+      const net = fetch(e.request)
+        .then(r => { if (r && r.ok) c.put(e.request, r.clone()); return r; })
+        .catch(() => hit);
+      return hit || net;
+    })
+  );
 });
